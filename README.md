@@ -29,13 +29,13 @@ SquareOps invests a lot in skilling the team and demand for DevOps is on the ris
 |  P01    | [Go through the General guidelines before starting ](GeneralGuidelines.md)  |
 |  P02    | [Check the instructions for Laptop Setup](LaptopSetupInstructions.md) |
 
-### LEVEL 1 comprises all the basics that are required in day-to-day DevOps tasks 
+### LEVEL 1 : comprises all the basics that are required in day-to-day DevOps tasks 
 
-This section has various modules which will help you to learn DevOps from scratch.
+This section has various modules which will help you to learn DevOps Job from scratch.
 
 | Module |   Description  |
 |---------|----------------|
-|  M01    | [Introduction to DevOps ](M1-IntroductionToDevops)  |
+|  M01    | [Introduction to DevOps ](Level-1/M1-IntroductionToDevops)  |
 |  M02    | [Linux Fundamentals used in the day to day basis ](M2-LinuxFundamentals)  |
 |  M03    | [Networking basics and OSI model ](M3-Networking)  |
 |  M04    | [Overview of the AWS cloud service provider with various AWS services ](M4-AWSBasics)  |
@@ -45,11 +45,11 @@ This section has various modules which will help you to learn DevOps from scratc
 
 #### Note: For a beginner, it will take up to 2-3 weeks to complete Level 1 but for an intermediate person Level 1 can be completed within 1-2 weeks  
 
-### LEVEL 2 : hands on different devops tools and application deployment  
+### LEVEL 2 : hands-on different DevOps tools and application deployment  
 
 | Module |   Description  |
 |---------|----------------|
-|  M01    | [VPN Overview, usage & Pritunl installation](https://github.com/maithelys/rtd/tree/main/Level-2/M1-VPN)  |
+|  M01    | [VPN Overview, usage & Pritunl installation](M1-VPN)  |
 |  M02    | [Deploy WordPress application with HA](https://github.com/maithelys/rtd/tree/main/Level-2/M2-WebApp2TierHA)  |
 |  M03    | [Introduction to CI/CD pipeline](https://github.com/maithelys/rtd/tree/main/Level-2/M3-CI-CD)  |
 |  M04    | [Introduction to Monitoring and Logging tools](https://github.com/maithelys/rtd/blob/main/Level-2/M4-Observability)  |
@@ -64,6 +64,6 @@ This section has various modules which will help you to learn DevOps from scratc
 
 To report an issue with a project:
 
-- Check the repository's [issue tracker](https://github.com/maithelys/rtd/issues) on GitHub
+- Check the repository's [issue tracker](https://github.com/squareops/road-to-devops/issues) on GitHub
 - Search to see if the issue has already been reported
 - If you can't find an answer to your question in the documentation or issue tracker, you can ask a question by creating a new issue. Be sure to provide enough context and details so others can understand your problem.
