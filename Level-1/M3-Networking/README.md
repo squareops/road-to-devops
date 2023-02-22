@@ -4,8 +4,8 @@ This module explains the basics of NETWORKING which is not related to DevOps Net
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [Networking Basics](https://github.com/maithelys/rtd/blob/main/Level-1/M6-Networking/L01-NetworkingBasics.md)  |
-|  L02    | [OSI Model](https://github.com/maithelys/rtd/blob/main/Level-1/M6-Networking/L02-OsiModel.md)  |
+|  L01    | [Networking Basics](L01-NetworkingBasics.md)  |
+|  L02    | [OSI Model](L02-OsiModel.md)  |
 
 #### Module Completion Estimate: 1 week for beginners and 2 Days for intermediate  
 

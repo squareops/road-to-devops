@@ -3,7 +3,7 @@ This module will use all the learning that you have grabbed so far from all the 
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [Deploy WordPress on AWS EC2](https://github.com/maithelys/rtd/blob/main/Level-1/M4-WebApp2Tier/L01-Wordpress-2-tier.md)  |
+|  L01    | [Deploy WordPress on AWS EC2](L01-Wordpress-2-tier.md)  |
 
 #### Module Completion Estimate: 1 week for beginners and 4 Days for intermediate  
 

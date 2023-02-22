@@ -1,6 +1,6 @@
 # Networking Basics:
 
-Let's forget the DevOps side of things to begin with here and we now need to look very briefly into some of the Networking fundamentals.
+Let's forget the DevOps side of things to begin with here, we now need to look very briefly into some of the Networking fundamentals.
 ## Network Devices 
 Host are any devices which send or receive traffic.
 

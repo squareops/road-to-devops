@@ -3,7 +3,7 @@ This module gives an introduction to cloud service provider AWS and its services
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [AWS BASICS](https://github.com/maithelys/rtd/blob/main/Level-1/M3-AWSBasics/L01-AWSBasics.md)  |
+|  L01    | [AWS BASICS](L01-AWSBasics.md)  |
 
 #### Module Completion Estimate: 1 week for a beginner and 4 Days for an intermediate  
 

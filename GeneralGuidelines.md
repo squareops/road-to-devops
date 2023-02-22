@@ -18,7 +18,7 @@
 
     - Launch on-demand instances. Create a cron runs every night at 9 PM which stops the running ec2 instances and RDS Databases. You can start the servers next day when you start working. Here are scripts 
 
-        - [stop EC2 instances]() 
+        - [stop EC2 instances](https://github.com/sq-ia/aws-stop-start-services/blob/develop/ec2-instances-stop-start/stop-EC2.md) 
 
         - [stop RDS]()
 

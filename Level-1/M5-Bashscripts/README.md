@@ -3,7 +3,7 @@ This Module gives an introduction to writing bash scripts for automation
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [Writing Bash Script](https://github.com/maithelys/rtd/blob/main/Level-1/M5-Bashscripts/L01-Bashscripts.md)  |
+|  L01    | [Writing Bash Script](L01-Bashscripts.md)  |
 
 #### Module Completion Estimate: 1 week for beginners and 2 Days for intermediate  
 
