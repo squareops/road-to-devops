@@ -4,7 +4,7 @@ This module gives a brief description of DevOps and what tools are required to b
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [What is DevOps ?](https://github.com/maithelys/rtd/blob/main/Level-1/M1-IntroductionToDevops/L01-WhatIsDevops.md)  |
+|  L01    | [What is DevOps ?](L01-WhatIsDevops.md)  |
 |  L02    | [DevOps in 5 minutes](https://github.com/maithelys/rtd/blob/main/Level-1/M1-IntroductionToDevops/L02-DevopsIn5Mins.md)   |
 |  L03    | [How to become DevOps Engineer?](https://github.com/maithelys/rtd/blob/main/Level-1/M1-IntroductionToDevops/L03-HowToBecomeDevopsEngineer.md)  |
 |  L04    | [Learn programming languages.(Python, Go, Bash scripts)](https://github.com/maithelys/rtd/blob/main/Level-1/M1-IntroductionToDevops/L04-ProgrammingLanguages.md)   |

@@ -3,7 +3,7 @@
 ## This section has various modules which will help you to learn DevOps Jobs from scratch.
 | Module |   Description  |
 |---------|----------------|
-|  M01    | [Introduction to DevOps ](https://github.com/maithelys/rtd/tree/main/Level-1/M1-IntroductionToDevops)  |
+|  M01    | [Introduction to DevOps ](M1-IntroductionToDevops)  |
 |  M02    | [Contains all the Linux Fundamentals used in the day to day basis ](https://github.com/maithelys/rtd/tree/main/Level-1/M2-LinuxFundamentals)  |
 |  M03    | [Overview of the AWS cloud service provider with various AWS services ](https://github.com/maithelys/rtd/tree/main/Level-1/M3-AWSBasics)  |
 |  M04    | [Hands on implementation of deploying WORDPRESS application on server ](https://github.com/maithelys/rtd/tree/main/Level-1/M4-WebApp2Tier)  |
