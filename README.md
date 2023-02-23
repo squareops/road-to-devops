@@ -24,39 +24,32 @@ SquareOps invests a lot in skilling the team and demand for DevOps is on the ris
 - Developer or strong problem solver :  3 months Full time 
 
 ##### Prerequisites :
-| Prerequisite |   Description  |
-|---------|----------------|
-|  P01    | [Go through the General guidelines before starting ](GeneralGuidelines.md)  |
-|  P02    | [Check the instructions for Laptop Setup](LaptopSetupInstructions.md) |
-
-### LEVEL 1 : comprises all the basics that are required in day-to-day DevOps tasks 
+### LEVEL 1: comprises all the basics that are required in day-to-day DevOps tasks 
 
 This section has various modules which will help you to learn DevOps Job from scratch.
 
 | Module |   Description  |
 |---------|----------------|
 |  M01    | [Introduction to DevOps ](Level-1/M1-IntroductionToDevops)  |
-|  M02    | [Linux Fundamentals used in the day to day basis ](M2-LinuxFundamentals)  |
-|  M03    | [Networking basics and OSI model ](M3-Networking)  |
-|  M04    | [Overview of the AWS cloud service provider with various AWS services ](M4-AWSBasics)  |
-|  M05    | [Hands on implementation of deploying WORDPRESS application on server ](M4-WebApp2Tier)  |
-|  M06    | [Introduction to Bash Scripts ](M6-Bashscripts)  |
-|  M07    | [Overview of Docker and Kubernetes   ](M7-Containerization)  |
+|  M02    | [Linux Fundamentals used in the day to day basis ](Level-1/M2-LinuxFundamentals)  |
+|  M03    | [Networking basics and OSI model ](Level-1/M3-Networking)  |
+|  M04    | [Overview of the AWS cloud service provider with various AWS services ](Level-1/M4-AWSBasics)  |
+|  M05    | [Hands on implementation of deploying WORDPRESS application on server ](Level-1/M5-WebApp2Tier)  |
+|  M06    | [Introduction to Bash Scripts ](Level-1/M6-Bashscripts)  |
+|  M07    | [Overview of Docker and Kubernetes](Level-1/M7-Containerization)  |
 
-#### Note: For a beginner, it will take up to 2-3 weeks to complete Level 1 but for an intermediate person Level 1 can be completed within 1-2 weeks  
-
-### LEVEL 2 : hands-on different DevOps tools and application deployment  
+#### Note: For a beginner, it will take up to 2-3 weeks to complete Level 1 but for an intermediate person Level 1 can be completed within 1-2 weeks
+### LEVEL 2: hands-on with different DevOps tools and application deployment  
 
 | Module |   Description  |
 |---------|----------------|
 |  M01    | [VPN Overview, usage & Pritunl installation](M1-VPN)  |
-|  M02    | [Deploy WordPress application with HA](https://github.com/maithelys/rtd/tree/main/Level-2/M2-WebApp2TierHA)  |
-|  M03    | [Introduction to CI/CD pipeline](https://github.com/maithelys/rtd/tree/main/Level-2/M3-CI-CD)  |
-|  M04    | [Introduction to Monitoring and Logging tools](https://github.com/maithelys/rtd/blob/main/Level-2/M4-Observability)  |
-|  M05    | [Infrastructure Automation](https://github.com/maithelys/rtd/tree/main/Level-2/M5-InfraAutomation)  |
-|  M06    | [AWS Well-Architected Training](https://github.com/maithelys/rtd/tree/main/Level-2/M6-WellArchitectedTraining)  |
-|  M07    | [MERN stack deployment ](https://github.com/maithelys/rtd/blob/main/Level-2/M7-WebApp3Tier-MERN)  |
-
+|  M02    | [Deploy WordPress application with HA](Level-2/M2-WebApp2TierHA)  |
+|  M03    | [Introduction to CI/CD pipeline](Level-2/M3-CI-CD)  |
+|  M04    | [Introduction to Monitoring and Logging tools](Level-2/M4-Observability)  |
+|  M05    | [Infrastructure Automation](Level-2/M5-InfraAutomation)  |
+|  M06    | [AWS Well-Architected Training](Level-2/M6-WellArchitectedTraining)  |
+|  M07    | [MERN stack deployment ](Level-2/M7-WebApp3Tier-MERN)  |
 
 #### Note: For a beginner, it will take up to 4-6 weeks to complete Level 2 but for an intermediate person Level 2 can be completed within 3-4 weeks  
 
