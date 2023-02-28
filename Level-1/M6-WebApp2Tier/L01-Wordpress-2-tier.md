@@ -1,8 +1,19 @@
-# 2-Tier Highly Available WordPress Deployment
-
+**2-Tier Highly Available WordPress Deployment
+**
 In this tutorial I’ll show you how you can setup LAMP environment on Linux platform and install WordPress blog manually on Amazon EC2 instance.
+**Contents**
+- [1. Create an AWS Account](#1-create-an-aws-account)
+- [2. Deploy a networking stack](#2-deploy-a-networking-stack)
+- [3. Create an Instance](#3-create-an-instance)
+- [4. SSH into your Instance](#4-ssh-into-your-instance)
+- [5. Install the Apache Web Server to run PHP](#5-install-the-apache-web-server-to-run-php)
+- [6. Install PHP to run WordPress](#6-install-php-to-run-wordpress)
+- [7. Install MySQL for adding database](#7-install-mysql-for-adding-database)
+- [8. Install WordPress](#8-install-wordpress)
+- [9. Map IP Address and Domain Name](#9-map-ip-address-and-domain-name)
+  - [Other Method: To change your WordPress site URL with the wp-cli](#other-method-to-change-your-wordpress-site-url-with-the-wp-cli)
 
-## Step 1. Create an AWS Account
+## 1. Create an AWS Account
 
 ![](Images/w1.png)
 
@@ -190,7 +201,7 @@ Instance details:
 
 - Launch your instance.
 
-## 3. SSH into your Instance
+## 4. SSH into your Instance
 Once your instance setup is complete and it shows instance is running, you can ssh into it.
 
 First of all, you need to identify the IP Address (public DNS) of your instance:
@@ -211,7 +222,7 @@ In this tutorial you need to perform many shell commands and most of command req
 
 ![](Images/w6.png)
 
-## 4. Install the Apache Web Server to run PHP
+## 5. Install the Apache Web Server to run PHP
 
 To install the Apache Web Server, type in terminal:
 ```
@@ -243,7 +254,7 @@ http://ec2-54-163-7-4.compute-1.amazonaws.com/
 
 (Use your actual public DNS name). You should see a standard Amazon place holder default page.
 
-## 5. Install PHP to run WordPress
+## 6. Install PHP to run WordPress
 To install PHP, type in terminal:
 
         [ec2-user ~]$ yum install php php-mysql
@@ -275,7 +286,7 @@ http://ec2-54-163-7-4.compute-1.amazonaws.com/test.php
 
  ![](Images/e6.png)
 
-## 6. Install MySQL for adding database
+## 7. Install MySQL for adding database
 To install MySQL, type:
 
 ```
@@ -322,7 +333,7 @@ Create your “blog” database:
 
 ![](Images/d5.png)
 
-## 7. Install WordPress
+## 8. Install WordPress
 To install WordPress, type:
 
         [ec2-user ~]$ cd /var/www/html
@@ -433,7 +444,7 @@ Require all granted
 
 Change the AllowOverride None line in the above section to read AllowOverride All.
 
-### Note:
+- Note:
 There are multiple AllowOverride lines in this file; be sure you change the line in the <Directory "/var/www/html"> section.
                 
                 AllowOverride All
@@ -442,7 +453,7 @@ Save the file and exit your text editor.
 
 ![](Images/w26.png)
 
-## 8. Map IP Address and Domain Name
+## 9. Map IP Address and Domain Name
 To use your blog in production, you will have to:
 
 - Associate an IP address to your instance
@@ -467,7 +478,7 @@ f. If you are using Route 53, then create A record and map it to the EC2 IP addr
 
 g. Once everything is configured and mapped correctly, access the General Settings in the WordPress management console and make sure the WordPress Address and Site Address are specified correctly using your domain name
 
-## Other Method: To change your WordPress site URL with the wp-cli
+### Other Method: To change your WordPress site URL with the wp-cli
 
 Note the old site URL and the new site URL for your instance. The old site URL is likely the public DNS name for your EC2 instance when you installed WordPress. The new site URL is the current public DNS name for your EC2 instance.
 
