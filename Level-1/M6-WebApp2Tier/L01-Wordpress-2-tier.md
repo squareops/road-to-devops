@@ -10,10 +10,160 @@ First of all you need to create your AWS account. You can sign up by following t
 
 Your credit card or debit card will be charge of minor value and it will be refunded once they verify it. Amazon offers a Free Usage Tier on which we will install WordPress, which is great to explore the services and even host real apps without being charged of single penny.
 
-## 2. Create an Instance
-After registration you have many options available and then you probably have this question in your mind that Which type of instance should I choose?
+## 2. Deploy a networking stack 
+Now you need to setup an isolated networking environment in which the following AWS resources will be deployed using the cloudFormation template:
 
-If you have new blog then you can choose EC2 micro instance which can handle around 200+ real-time traffic.
+- VPC 
+- Public Subnets
+- Public Route Tables
+- IGW 
+
+Firstly save the below in the file named "vpc.yml"
+```
+AWSTemplateFormatVersion: 2010-09-09
+Description: It contains the low grade security Vpc having 2 public subnets.
+Metadata: 
+  AWS::CloudFormation::Interface: 
+    ParameterGroups: 
+      - Label: 
+          default: "Network Configurations"
+        Parameters: 
+          - VpcCIDR
+          - PublicSubnet1CIDR
+          - PublicSubnet2CIDR
+Parameters:
+  VpcCIDR:
+    Description: cidr block for vpc.
+    Type: String 
+    Default: 10.10.0.0/16
+    ConstraintDescription: Must be a valid IP range in x.x.x.x/x notation
+  
+  PublicSubnet1CIDR:
+    Description: Cidr block for public subnet 1.
+    Type: String
+    Default: 10.10.1.0/24
+
+  PublicSubnet2CIDR:
+    Description: Cidr block for public subnet 2.
+    Type: String
+    Default: 10.10.2.0/24
+
+Resources:
+
+  AppVPC:
+    Type: AWS::EC2::VPC  
+    Properties:
+      CidrBlock: !Ref VpcCIDR 
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value: !Sub vpc-${AWS::StackName}
+        
+# create a internetgateway 
+  AppIGW:
+    Type: AWS::EC2::InternetGateway
+    DependsOn: AppVPC
+    Properties:
+      Tags:
+      - Key: Name
+        Value: !Sub IGW-${AWS::StackName}
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref AppVPC
+      InternetGatewayId: !Ref AppIGW
+  
+  # Create 2 public subnet
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref AppVPC
+      AvailabilityZone: !Select [ '0', !GetAZs '' ]    # Get the first AZ in the list   
+      CidrBlock: !Ref PublicSubnet1CIDR
+      Tags:
+      - Key: Name
+        Value: !Sub Public-Subnet1-${AWS::StackName}
+      MapPublicIpOnLaunch: true       #it will assign public ip on launch
+
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: AppVPC
+      AvailabilityZone:  !Select [ '1', !GetAZs '' ]    # Get the second AZ in the list 
+      CidrBlock: !Ref PublicSubnet2CIDR
+      MapPublicIpOnLaunch: true
+      Tags:
+      - Key: Name
+        Value: !Sub Public-Subnet2-${AWS::StackName}
+
+  # Public route table for our subnets:
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref AppVPC
+      Tags:
+      - Key: Name
+        Value: !Sub PublicRouteTable-${AWS::StackName}
+
+  # Public route table has direct routing to IGW:
+
+  PublicRoute1:  
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref AppIGW
+
+# Attach the public subnets to public route tables,
+  # and attach the private subnets to private route tables:   
+
+  PublicSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet1
+      RouteTableId: !Ref PublicRouteTable
+
+  PublicSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet2
+      RouteTableId: !Ref PublicRouteTable
+  
+
+Outputs:
+  VPCID:
+    Description: "VPC Id"
+    Value: !Ref AppVPC
+  Public1:
+    Description: Public Subnet1
+    Value: !Ref PublicSubnet1
+  Public2:
+    Description: Public Subnet2
+    Value: !Ref PublicSubnet2
+```
+Now go the cloudFormation section and upload the template as follows 
+
+ ![](Images/v1.png)
+
+Launch the template after reviewing all the configurations 
+
+  ![](Images/v2.png)
+
+After successful deployment of the template, check the resources created 
+
+ ![](Images/v3.png)
+
+ ![](Images/v4.png)
+
+## 3. Create an Instance
+
+Now we will create an EC2 instance, if you have new blog then you can choose EC2 micro instance which can handle around 200+ real-time traffic.
 
 It has also attractive price structure but if you are migrating your existing blog and having traffic more than thousand per day then you must choose Small instance which can handle that traffic very easily.
 
@@ -26,15 +176,17 @@ To create a new instance, access the AWS Management Console and click the EC2 ta
 
 Instance details:
 
-        - Select the Instance Type you want to use. I chose Small (m5a.small).
+        - Select the Instance Type you want to use. I chose Small (t3a.small).
 
-![](Images/w3.png)
+ ![](Images/e1.png)
 
 - Create a new key pair.
 
-        - Enter a name for your key pair (i.e. crunchify) and download your key pair (i.e. crunchify.pem).
+        - Enter a name for your key pair (i.e. road-to-devops) and download your key pair (i.e. road-to-devops.pem).
 
-- Select the quick start security group.
+- Select VPC created in step 1 and give security group name 
+  
+![](Images/e2.png)
 
 - Launch your instance.
 
@@ -46,18 +198,12 @@ First of all, you need to identify the IP Address (public DNS) of your instance:
 - Look for the Public DNS in the instance description (bottom part of the screen).
 - Use that address (and a path to your .pem file) to ssh into your instance:
 
-                ssh ec2-user@ec2-50-17-15-27.compute-1.amazonaws.com -i ~/crunchify.pem
-
-![](Images/w4.png)
-
+                ssh ec2-user@ec2-50-17-15-27.compute-1.amazonaws.com -i ~/road-to-devops.pem
 
 If you are on windows system then you should use Putty for connect as SSH. You can connect with putty by following this article.
 - If you get an error message about your .pem file permissions being too open, chmod your .pem file as follows:
 
-        [ec2-user ~]$ chmod 600 ~/crunchify.pem
-
-![](Images/w5.png)
-
+        [ec2-user ~]$ chmod 400 ~/road-to-devops.pem
 
 In this tutorial you need to perform many shell commands and most of command require root access. So, to avoid this we will prefix these all command with sudo by switching user once for all by this command.
 
@@ -82,14 +228,21 @@ Start the Apache Web Server:
 
 ![](Images/w8.png)
 
-After setup, to test your Web Server, open a browser and access your web site:
+ ![](Images/e3.png)
 
-http://ec2-50-17-15-27.compute-1.amazonaws.com
+After setup, to test your Web Server, allow port 80 in security group from everywhere 
 
-![](Images/w9.png)
+ ![](Images/e4.png)
 
+open a browser and access your web site:
+
+
+http://ec2-54-163-7-4.compute-1.amazonaws.com/
+
+ ![](Images/e5.png)
 
 (Use your actual public DNS name). You should see a standard Amazon place holder default page.
+
 ## 5. Install PHP to run WordPress
 To install PHP, type in terminal:
 
@@ -110,50 +263,65 @@ Create a page to test your PHP installation:
 ```
 ![](Images/w11.png)
 
-Type i to start the insert mode
-Type <?php phpinfo() ?>
-Type :wq to write the file and quit vi
+- Type i to start the insert mode
+- Type <?php phpinfo() ?>
+- Type :wq to write the file and quit vi
+  
 Open a browser and access test.php to test your PHP installation:
-http://ec2-50-17-15-27.compute-1.amazonaws.com/test.php
+
+http://ec2-54-163-7-4.compute-1.amazonaws.com/test.php
 
 ![](Images/w12.png)
 
-(Use your public DNS name)
+ ![](Images/e6.png)
+
 ## 6. Install MySQL for adding database
 To install MySQL, type:
 
-        [ec2-user ~]$ yum install mysql-server
-
-![](Images/w13.png)
+```
+rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+sudo yum localinstall mysql57-community-release-el7-8.noarch.rpm
+sudo yum install mysql-community-server
+```
 
 Start MySQL:
+```
+service mysqld start
+```
+Now verify the port 3306 on which mysql is running using the following command 
 
-        [ec2-user ~]$ service mysqld start
+        sudo netstat -nltp
 
-![](Images/w14.png)
+![](Images/d1.png)
+
+Now check the root password generated by running the following command 
+```
+sudo grep 'A temporary password is generated for root@localhost' /var/log/mysqld.log |tail -1
+```
+ ![](Images/d2.png)
+
+Here the password showed in hash is the the root password "b)IJj-q;F4F8"
+
+After getting the password, run the following command and enter the above password 
+
+```
+mysql -u root -p
+```
+Update the current root password by running the alter command 
+
+```
+ALTER USER `root`@`localhost` IDENTIFIED BY 'Roadtodevops12356@@',
+       `root`@`localhost` PASSWORD EXPIRE NEVER;
+```
+ ![](Images/d3.png)
 
 Create your “blog” database:
 
-        [ec2-user ~]$ mysqladmin -u root create blog
+![](Images/d4.png)
 
-![](Images/w15.png)
+![](Images/d5.png)
 
-Secure your database:
-
-        [ec2-user ~]$ mysql_secure_installation
-
-![](Images/w16.png)
-
-Answer the wizard questions as follows:
-```
-Enter current password for root: Press return for none
-Change Root Password: Y
-New Password: Enter your new password
-Remove anonymous user: Y
-Disallow root login remotely: Y
-Remove test database and access to it: Y
-Reload privilege tables now: Y
-```
 ## 7. Install WordPress
 To install WordPress, type:
 
@@ -195,8 +363,11 @@ Create the WordPress wp-config.php file:
 Modify the database connection parameters as follows:
 
 define(‘DB_NAME’, ‘blog’);
+
 define(‘DB_USER’, ‘root’);
+
 define(‘DB_PASSWORD’, ‘YOUR_PASSWORD’);
+
 define(‘DB_HOST’, ‘localhost’);
 
 ![](Images/w22.png)
@@ -205,14 +376,21 @@ define(‘DB_HOST’, ‘localhost’);
 - Type :wq to write the file and quit vi
 -  Open a Browser and access your blog:
 
-http://ec2-50-17-15-27.compute-1.amazonaws.com/blog (Use your public DNS name).
+http://ec2-54-163-7-4.compute-1.amazonaws.com/blog (Use your public DNS name).
 
-![](Images/w23.png)
-
+ ![](Images/d6.png)
 
 This should open the WordPress installation configuration process.
 
-### TIP: To allow WordPress to use permalinks
+ ![](Images/d7.png)
+
+ ![](Images/d8.png)
+
+- Note: If you face issues in php version, kindly update the php version using the following link :
+  
+  https://www.ezeelogin.com/kb/article/how-to-upgrade-php-to-7-2-on-centos-282.html
+
+- TIP: To allow WordPress to use permalinks
 
 WordPress permalinks need to use Apache .htaccess files to work properly, but this is not enabled by default on Amazon Linux. Use this procedure to allow all overrides in the Apache document root.
 
@@ -279,9 +457,15 @@ c. Right-click the newly allocated IP address and select “Associate” in the 
 
 d. To map your domain name to your IP address, you will have to use the tools provided by your domain registrar.
 
-e. If you use GoDaddy, specify NS73.DOMAINCONTROL.COM and NS74.DOMAINCONTROL.COM as the name servers for your domain, and use the DNS Manager to modify the A record and point to your IP address.
+e. If you use GoDaddy, specify NS73.DOMAINCONTROL.COM and NS74.DOMAINCONTROL.COM as the name servers for your domain, and use the DNS Manager to modify the A record and point to your IP address or
 
-f. Once everything is configured and mapped correctly, access the General Settings in the WordPress management console and make sure the WordPress Address and Site Address are specified correctly using your domain name
+f. If you are using Route 53, then create A record and map it to the EC2 IP address 
+
+ ![](Images/d9.png)
+
+ ![](Images/d10.png)
+
+g. Once everything is configured and mapped correctly, access the General Settings in the WordPress management console and make sure the WordPress Address and Site Address are specified correctly using your domain name
 
 ## Other Method: To change your WordPress site URL with the wp-cli
 

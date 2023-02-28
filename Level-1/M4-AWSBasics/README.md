@@ -1,4 +1,4 @@
-# Module 3: Introduction to AWS 
+# Module 4: Introduction to AWS 
 This module gives an introduction to cloud service provider AWS and its services. Along with this, it has a certification link for AWS Certified Solutions Architect which helps have a basic understanding of AWS services 
 
 | Lecture |   Description  |

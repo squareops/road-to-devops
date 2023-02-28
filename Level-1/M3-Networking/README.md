@@ -1,4 +1,4 @@
-# Module 6: Networking 
+# Module 3: Networking 
 
 This module explains the basics of NETWORKING which is not related to DevOps Networking but on a broader level, it is required.
 

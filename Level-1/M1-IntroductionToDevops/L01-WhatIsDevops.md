@@ -40,4 +40,4 @@ Here are some of the reasons why DevOps is important:
 Overall, DevOps is a critical approach for companies that want to stay competitive in today's fast-paced digital environment, by enabling them to deliver better software, more quickly and reliably.
 
 ### For more information
-https://www.youtube.com/watch?v=_Gpe1Zn-1fE&t=43s
+[What is DevOps](https://www.youtube.com/watch?v=_Gpe1Zn-1fE&t=43s)

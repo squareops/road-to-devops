@@ -1,6 +1,6 @@
 # Review networking security and protocols. (HTTP, HTTPS, SSL, SSH)
 
-#### What is HTTPS difference between HTTP and HTTPS?
+#### What is difference between HTTP and HTTPS?
 HTTPS is HTTP with encryption and verification. The only difference between the two protocols is that HTTPS uses TLS (SSL) to encrypt normal HTTP requests and responses, and to digitally sign those requests and responses. As a result, HTTPS is far more secure than HTTP.
 ![](Images/http-vs-https.png)
 ![](Images/difference-between-http-and-https.png)
@@ -49,6 +49,6 @@ HTTP means HyperText Transfer Protocol. HTTP is the underlying protocol used by 
 
 #### For more information 
 
-https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/
+[Why Is HTTP not secure ?](https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/)
 
-https://medium.com/@kasunpdh/ssl-handshake-explained-4dabb87cdce
+[ SSL Handshake ](https://medium.com/@kasunpdh/ssl-handshake-explained-4dabb87cdce)

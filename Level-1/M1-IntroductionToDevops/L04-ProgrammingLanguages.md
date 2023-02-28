@@ -25,6 +25,6 @@ With uses in container systems, API integration and microservices, Go -- sometim
 ![](Images/language.png)
 
 #### For more information 
-https://devopscube.com/programming-languages-devops/
+[Best Programming & Scripting Languages for DevOps Engineers](https://devopscube.com/programming-languages-devops/)
 
-https://www.apexgloballearning.com/programming-languages-useful-for-devops/
+[11 Programming Languages Useful for DevOps](https://www.apexgloballearning.com/programming-languages-useful-for-devops/)
