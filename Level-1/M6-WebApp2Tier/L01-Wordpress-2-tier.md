@@ -1,6 +1,7 @@
-**2-Tier Highly Available WordPress Deployment
-**
+**2-Tier Highly Available WordPress Deployment**
+
 In this tutorial I’ll show you how you can setup LAMP environment on Linux platform and install WordPress blog manually on Amazon EC2 instance.
+
 **Contents**
 - [1. Create an AWS Account](#1-create-an-aws-account)
 - [2. Deploy a networking stack](#2-deploy-a-networking-stack)
@@ -29,7 +30,7 @@ Now you need to setup an isolated networking environment in which the following 
 - Public Route Tables
 - IGW 
 
-Firstly save the below in the file named "vpc.yml"
+Firstly save the below yaml in the file named "vpc_minimal.yml"
 ```
 AWSTemplateFormatVersion: 2010-09-09
 Description: It contains the low grade security Vpc having 2 public subnets.
@@ -241,7 +242,7 @@ Start the Apache Web Server:
 
  ![](Images/e3.png)
 
-After setup, to test your Web Server, allow port 80 in security group from everywhere 
+After setup you need to test your Web Server,so allow port 80 in security group from everywhere 
 
  ![](Images/e4.png)
 
