@@ -65,7 +65,6 @@ redis
 ## Step 2: Create a Dockerfile
 
 Dockerfile
-syntax=docker/dockerfile:1
 ```
 FROM python:3.7-alpine
 WORKDIR /code
@@ -90,6 +89,8 @@ This tells Docker to:
 
 ## Step 3: Define services in a Compose file🔗
 
+Create a file with name docker-compose.yml and paste the following configurations:
+
 ```
 version: "3.9"
 services:
@@ -103,6 +104,8 @@ services:
 ## Step 4: Build and run your app with Compose🔗
 
         docker compose up
+
+ ![](Images/docker23.png)
 
 ```
 Creating network "composetest_default" with the default driver
@@ -126,3 +129,5 @@ redis_1  | 1:M 17 Aug 22:11:10.483 * Ready to accept connections
 ```
 
 Enter http://localhost:8000/ in a browser to see the application running
+
+ ![](Images/docker22.png)

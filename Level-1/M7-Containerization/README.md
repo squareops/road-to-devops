@@ -11,9 +11,8 @@ This module includes all the containerization tools being used in DevOps. Starti
 |  L06    | [Docker Storage](L06-DockerStorage.md)  |
 |  L07    | [Docker Volumes](L07-DockerVolumes.md)  |
 |  L08    | [Docker Compose](L08-DockerCompose.md)  |
-|  L09    | [Setup Laravel application with Docker compose](L09-SetupLaravelWithDockerCompose.md)  |
-|  L10    | [Kubernetes](L10-Kubernetes.md)  |
-|  L11    | [Kubernetes Architecture](L11-KubernetesArchitecture.md)  |
+|  L09    | [Kubernetes](L09-Kubernetes.md)  |
+|  L10    | [Kubernetes Architecture](L10-KubernetesArchitecture.md)  |
 
 #### Module Completion Estimate: 1 week for beginners and 2 Days for intermediate  
 
