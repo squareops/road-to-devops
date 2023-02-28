@@ -43,7 +43,7 @@ This section has various modules which will help you to learn DevOps Job from sc
 
 | Module |   Description  |
 |---------|----------------|
-|  M01    | [VPN Overview, usage & Pritunl installation]((Level-2/M1-VPN)  |
+|  M01    | [VPN Overview, usage & Pritunl installation](Level-2/M1-VPN)  |
 |  M02    | [Deploy WordPress application with HA](Level-2/M2-WebApp2TierHA)  |
 |  M03    | [Introduction to CI/CD pipeline](Level-2/M3-CI-CD)  |
 |  M04    | [Introduction to Monitoring and Logging tools](Level-2/M4-Observability)  |
