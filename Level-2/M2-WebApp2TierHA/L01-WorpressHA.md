@@ -1,6 +1,16 @@
 
 # Deploy WordPress with High Availability
 
+# Contents 
+[Deploy a secure networking stack](#step-1--deploy-a-secure-networking-stack)
+[Install Pritunl on EC2 instance](#step-2-install-pritunl-on-ec2-instance)
+[Create role to connect EC2 using session manager ](#step-3-create-role-to-connect-using-session-manager)
+[Create MYSQL RDS ](#step-4-create-mysql-rds-inside-the-vpc-in-a-private-subnet)
+[Setup Wordpress EC2 Instance ](#step-5-create-ec2-instance-and-install-nginx)
+[]()
+[]()
+
+# Overview
 In computing, the term availability is used to describe the period of time when a service is available, as well as the time required by a system to respond to a request made by a user. High availability is a quality of a system or component that assures a high level of operational performance for a given period of time.
 
 These are the following steps that you need to follow when deploying the WORDPRESS application 
@@ -21,16 +31,9 @@ These are the following steps that you need to follow when deploying the WORDPRE
 
 7. Test scaling using [stress tool for Linux](https://www.tecmint.com/linux-cpu-load-stress-test-with-stress-ng-tool/)
 
-[Deploy a secure networking stack](#step-1--deploy-a-secure-networking-stack)
-[](#step-2-install-pritunl-on-ec2-instance)
-[](#step-3-create-role-to-connect-using-session-manager)
-[](#step-4-create-mysql-rds-inside-the-vpc-in-a-private-subnet)
-[](#step-5--create-ec2-instance-and-install-nginx)
-
-
 # Step-1 : Deploy a secure networking stack 
 
-Create a file named secure_vpc.yml and copy the following code in it 
+Create a file named **secure_vpc.yml** in your local and copy the following code in it 
 
 ```
 AWSTemplateFormatVersion: 2010-09-09
@@ -380,12 +383,12 @@ After successful deployment of stack, check the resources created
 
  ![](Images/w10.png)
 
-In the secure networking stack it will create the following AWS resources 
+In this secure networking stack it will create the following AWS resources 
 
-- a VPC in which we create 4 subnets in which create 2 public subnets and 2 private subnets.
-Example: For public subnets take CIDR 10.0.0.0/24 and 10.0.1.0/24 and for private subnets take 10.0.2.0/24 and 10.0.3.0/24
+- a VPC with cidr 10.0.0.0/16 in which we create 4 subnets in which create 2 public subnets and 2 private subnets.
+Example: For public subnets take CIDR 10.0.1.0/24 and 10.0.2.0/24 and for private subnets take 10.0.3.0/24 and 10.0.4.0/24
 
-- Create 2 Route Tables inside the VPC, one for the public subnets and one for the private subnets. Inside the subnet association of the public Route Table, add the public subnets of the VPC (10.0.0.0/24 and 10.0.1.0/24) and, In the private Route Table, add the private subnets of VPC (10.0.2.0/24 and 10.0.3.0/24)
+- Create 2 Route Tables inside the VPC, one for the public subnets and one for the private subnets. Inside the subnet association of the public Route Table, add the public subnets of the VPC (10.0.1.0/24 and 10.0.2.0/24) and, In the private Route Table, add the private subnets of VPC (10.0.3.0/24 and 10.0.4.0/24)
 
 - create an Internet Gateway, and in the public Route Table, add the route to the Internet Gateway so that public subnets can have access to the internet  as shown below.
 
@@ -398,25 +401,25 @@ Using this document you can [install pritunl vpn client on the ec2 server](M1-VP
 
 # Step-3: Create role to connect using session manager 
 
-a. Go to IAM section and choose to create an IAM role 
+a. Go to **IAM section** and choose to create an IAM role 
 
 ![](Images/e1.png)
 
-b. add AmazonSSMManagedInstanceCore policy
+b. add **AmazonSSMManagedInstanceCore** policy
 
 ![](Images/e2.png)
 
-c. give the role name and create the role 
+c. give the **role name** and create the role 
 
 ![](Images/e3.png)
 
 # Step-4 : Create MySQL RDS inside the VPC in a private subnet.
 
-Now we need to create a Mysql RDS inside our VPC so that we can have a database which will connect with the Wordpress Site.
+Now we need to create a MYSQL RDS inside VPC, so that we can have a database which will connect with the Wordpress Site.
 
 In this step, we will use Amazon RDS to create a MySQL DB Instance with db.t2.micro DB instance class, 20 GB of storage, and automated backups enabled with a retention period of one day. As a reminder, all of this is Free Tier eligible.
 
-1. In the Create database section, choose Create database. Then choose MYSQL engine-type and the mysql version as 8.0.
+1. In the Create database section, choose **Create database**. Then choose MYSQL engine-type and then choose MYSQL version as 8.0.
 
  ![](Images/w11.png)
 
@@ -430,43 +433,43 @@ In this step, we will use Amazon RDS to create a MySQL DB Instance with db.t2.mi
 
  ![](Images/w16.png)
 
-2. Now check the RDS created successfully 
+2. Now check that the RDS is created successfully 
 
 ![](Images/w17.png)
 
-3. Login into the database with the following string to verify credentials 
+3. Login into the database with the following string to verify DB credentials 
 
-But firstly install the mysql client for testing the db connection on the pritunl EC2 instance:
+But firstly **install the MYSQL client** for testing the DB connection on the pritunl EC2 instance:
 
       sudo apt install mysql-client-core-8.0 
 
-Now run the following command 
+Now run the following command to check the DB connection 
 
       mysql -h road-to-devops-db.c5zbpa0be4xa.us-east-1.rds.amazonaws.com -P 3306 -u road_to_devops -p
 
 ![](Images/e6.png)
 
+Make sure you have allowed port 3306 from the EC2 instance you are testing the connection
+
 4. Create the database 
 
 ![](Images/e5.png)
 
-verify the database created 
+- Verify the database created 
 
 ![](Images/e7.png)
 
-5. 
+- NOTE: Do remember the credentials that you have set during the creation of the MYSQL RDS
 
-- NOTE: Do remember the credentials that you have set during the creation of the Mysql RDS
+# Step-5 : Create EC2 instance and install nginx, PHP & wordPress 
 
-# Step-5 : Create EC2 instance and install nginx, 
-
-Now we have to install wordpress using Nginx(Web Server) and Php-fpm(PHP-FPM is a fast CGI process manager which basically makes use of a content management system in order to maintain the websites and load pages  seamlessly to retrieve data conveniently).
+Now we have to install wordPress using Nginx(Web Server) and Php-fpm(PHP-FPM is a fast CGI process manager which basically makes use of a content management system in order to maintain the websites and load pages  seamlessly to retrieve data conveniently).
 
 To install the same follow this document :
 
-https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-on-ubuntu-20-04
+https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-on-ubuntu-20-04, otherwise you can follow the below steps one by one 
 
-Firstly we will create an EC2 instance with the following configurations 
+- Firstly we will create an EC2 instance with the following configurations 
 
 ![](Images/e1.png)
 
@@ -474,32 +477,36 @@ Firstly we will create an EC2 instance with the following configurations
 
 ![](Images/e3.png)
 
-In the advanced setting choose the IAM instance profile and choose role name created in step 3
+- In the advanced setting choose the IAM instance profile and choose role name created in step 3
 
-Now you can connect to the instance launched in private subnet using session manager, so on the EC2 console click on the CONNECT option 
+- Now you can connect to the instance launched in private subnet using session manager, for this go to the EC2 console and click on the CONNECT option 
 
 ![](Images/i4.png)
 
-Then click on connect option 
+- Then click on connect option 
 
 ![](Images/i5.png)
 
-run command 
+run the following command on the terminal  
+
     sudo -i 
 
 ## Install nginx 
+
+- By running the following commands on the terminal you can install nginx 
+
 ```
 sudo apt update
 sudo apt install nginx
 ```
 
-Type the address that you receive in your web browser and it will take you to Nginx’s default landing page:
+- Type the address that you receive in your web browser and it will take you to Nginx’s default landing page:
 
 http://server_domain_or_IP
 
 ![](Images/e4.png)
 
-note: allow port 80 in security group from everywhere 
+- note: allow port 80 in security group from everywhere 
 
 ![](Images/p4.png)
 
@@ -508,7 +515,7 @@ note: allow port 80 in security group from everywhere
 ```
 sudo apt install php-fpm php-mysql
 ```
-check the php version by running the following command 
+- check the php version by running the following command 
 
 ```
 php -v
@@ -791,27 +798,62 @@ Once you log in, you will be taken to the WordPress administration dashboard:
 ![](Images/e13.png)
 
 After that create an AMI of the instance so that we can use it as a template in AutoScaling.
+
+![](Images/e14.png)
+
+![](Images/e15.png)
            
+Now go in AMIs section and verify the image created 
+
 # Step-4: Create Application Load Balancer and Target Group .
 
 a. Go to the target group and create a target group in which define the Target group Name and mention the VPC that we created under TG and after that do register the instance in which we have deployed the wordpress as shown below:
 
-![](Images/4.png)
+![](Images/e16.png)
+
+![](Images/e17.png)
+
+![](Images/e18.png)
+
+![](Images/e19.png)
 
 b. Now we have to Request an ACM certificate so that we can have the SSL to our website. Go to the certificate manager and request a public certificate and enter your fully qualified Domain Name of yours. If you don’t have one, create the same under Route53 service in AWS.
 
-![](Images/w5.png)
-
+![](Images/e25.png)
 
 Refer this document to get an ACM certificate to your domain:
 [Requesting a public certificate](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html)
 
-
 c. Now we need to create an Application Load Balancer in the public subnet in the VPC that we created earlier and in the listener add the HTTP port 80 and HTTPS port 443 so that we can add the SSL termination certificate for the Target Group we already created. Just need to add it in the Load Balancer. Make sure you add the Security Group of port 80 and 443 open for all.Do fill all the required details and create the Application Load Balancer.
 
-![](Images/w6.png)
+![](Images/e20.png)
 
-# Step-5: Creating Auto Scaling Group in the Private Subnet of VPC.
+![](Images/e21.png)
+
+![](Images/e22.png)
+
+Create a security group for Application Load balancer 
+
+![](Images/e23.png)
+
+![](Images/e24.png)
+
+Configure listeners in application load balancer 
+
+![](Images/e26.png)
+
+- Listener 80 redirect to HTTPS 
+- Listener 443 forward to target group 
+  
+Rules in Listener 443 
+
+![](Images/e27.png)
+
+Certificate configuration listener in HTTPs 443 
+
+![](Images/e28.png)
+
+# Step-6: Creating Auto Scaling Group in the Private Subnet of VPC.
 
 a. First we create a launch template from the AMI we have created.Give a name of the Launch template according to you .Under AMI slot choose the AMI that you have created.Give a key pair that you want all the Ec2 instance that ASG will create have it,then click on create Launch template.
 
@@ -820,14 +862,16 @@ b. Now select the launch template and click on action and select create AutoScal
 c. Use the Target group which is using the existing Load Balancer which we have created already.Give your inputs for maximum number of instances that needs to be created ,minimum number of instances and required number of instances and create the Auto Scaling Group.
 
 
-# Step-6: Map subdomain with the Load Balancer .
+# Step-7: Map subdomain with the Load Balancer .
 a. Now we have to go to our subdomain and click on edit record.Under it,click on Alias and you have to choose the endpoint as Application Load Balancer .Choose the region in which you have created all the configurations.
-    
+
+![](Images/e30.png)
+
 b. Now mention the load balancer we have created so that whenever we hit the domain Load Balancer will route the traffic to the instance we have attached through our target group.
 
 c. Now try to check the same by hitting the domain that we mapped to load balancer.
 
-![](Images/w7.png)
+![](Images/e29.png)
 
 
 
