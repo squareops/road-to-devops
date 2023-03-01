@@ -38,9 +38,6 @@ systemctl start mongod
 systemctl start pritunl
 ```
 
-If the above commands don’t work, please terminate the public instance and create new one and  follow the below link:
-Pritunl Installation on ubuntu-2004
-
 ### NOTE: Make sure to allow 80 and 443 in the inbound rule of bastion/jump instance’s security group
 
 4. After Installation Access it from browser using your server public IP/Domain 
