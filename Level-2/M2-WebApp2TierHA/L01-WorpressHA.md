@@ -2,13 +2,26 @@
 # Deploy WordPress with High Availability
 
 # Contents 
-[Deploy a secure networking stack](#step-1--deploy-a-secure-networking-stack)
-[Install Pritunl on EC2 instance](#step-2-install-pritunl-on-ec2-instance)
-[Create role to connect EC2 using session manager ](#step-3-create-role-to-connect-using-session-manager)
-[Create MYSQL RDS ](#step-4-create-mysql-rds-inside-the-vpc-in-a-private-subnet)
-[Setup Wordpress EC2 Instance ](#step-5-create-ec2-instance-and-install-nginx)
-[]()
-[]()
+- [Deploy WordPress with High Availability](#deploy-wordpress-with-high-availability)
+- [Contents](#contents)
+- [Overview](#overview)
+- [Step-1 : Deploy a secure networking stack](#step-1--deploy-a-secure-networking-stack)
+- [Step-2: Install Pritunl on EC2 instance](#step-2-install-pritunl-on-ec2-instance)
+- [Step-3: Create role to connect using session manager](#step-3-create-role-to-connect-using-session-manager)
+- [Step-4 : Create MySQL RDS inside the VPC in a private subnet.](#step-4--create-mysql-rds-inside-the-vpc-in-a-private-subnet)
+- [Step-5 : Create EC2 instance and install nginx, PHP \& wordPress](#step-5--create-ec2-instance-and-install-nginx-php--wordpress)
+  - [Install nginx](#install-nginx)
+  - [Install PHP by running the following commands:](#install-php-by-running-the-following-commands)
+  - [Configuring Nginx to Use the PHP Processor](#configuring-nginx-to-use-the-php-processor)
+  - [Testing PHP with Nginx](#testing-php-with-nginx)
+  - [Installing Additional PHP Extensions](#installing-additional-php-extensions)
+  - [Configuring Nginx](#configuring-nginx)
+  - [Downloading WordPress](#downloading-wordpress)
+  - [Setting up the WordPress Configuration File](#setting-up-the-wordpress-configuration-file)
+  - [Completing the Installation Through the Web Interface](#completing-the-installation-through-the-web-interface)
+- [Step-6: Create Application Load Balancer and Target Group .](#step-6-create-application-load-balancer-and-target-group-)
+- [Step-7: Creating Auto Scaling Group in the Private Subnet of VPC.](#step-7-creating-auto-scaling-group-in-the-private-subnet-of-vpc)
+- [Step-8: Map subdomain with the Load Balancer .](#step-8-map-subdomain-with-the-load-balancer-)
 
 # Overview
 In computing, the term availability is used to describe the period of time when a service is available, as well as the time required by a system to respond to a request made by a user. High availability is a quality of a system or component that assures a high level of operational performance for a given period of time.
@@ -805,7 +818,7 @@ After that create an AMI of the instance so that we can use it as a template in 
            
 Now go in AMIs section and verify the image created 
 
-# Step-4: Create Application Load Balancer and Target Group .
+# Step-6: Create Application Load Balancer and Target Group .
 
 a. Go to the target group and create a target group in which define the Target group Name and mention the VPC that we created under TG and after that do register the instance in which we have deployed the wordpress as shown below:
 
@@ -853,7 +866,7 @@ Certificate configuration listener in HTTPs 443
 
 ![](Images/e28.png)
 
-# Step-6: Creating Auto Scaling Group in the Private Subnet of VPC.
+# Step-7: Creating Auto Scaling Group in the Private Subnet of VPC.
 
 a. First we create a launch template from the AMI we have created.Give a name of the Launch template according to you .Under AMI slot choose the AMI that you have created.Give a key pair that you want all the Ec2 instance that ASG will create have it,then click on create Launch template.
 
@@ -862,7 +875,7 @@ b. Now select the launch template and click on action and select create AutoScal
 c. Use the Target group which is using the existing Load Balancer which we have created already.Give your inputs for maximum number of instances that needs to be created ,minimum number of instances and required number of instances and create the Auto Scaling Group.
 
 
-# Step-7: Map subdomain with the Load Balancer .
+# Step-8: Map subdomain with the Load Balancer .
 a. Now we have to go to our subdomain and click on edit record.Under it,click on Alias and you have to choose the endpoint as Application Load Balancer .Choose the region in which you have created all the configurations.
 
 ![](Images/e30.png)
@@ -879,4 +892,3 @@ c. Now try to check the same by hitting the domain that we mapped to load balanc
 
 
 
-[def]: #step-1--deploy-a-secure-networking-stack
