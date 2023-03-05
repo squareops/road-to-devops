@@ -4,7 +4,7 @@ This module gives a hands-on example of deploying a WordPress application on an 
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [Deploy WordPress application with HA ](https://github.com/maithelys/rtd/blob/main/Level-2/M2-WebApp2TierHA/L01-WorpressHA.md)  |
+|  L01    | [Deploy WordPress application with HA ](L01-WorpressHA.md)  |
 
 #### Module Completion Estimate: 4 days for beginners and 2 days for an intermediate  
 

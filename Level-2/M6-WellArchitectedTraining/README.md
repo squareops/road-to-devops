@@ -9,7 +9,7 @@ This module enrolls for AWS Well-Architected Training which covers the following
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [AWS Well-Architected Training Course](https://github.com/maithelys/rtd/blob/main/Level-2/M6-WellArchitectedTraining/L01-Training.md)  |
+|  L01    | [AWS Well-Architected Training Course](L01-Training.md)  |
 
 #### Module Completion Estimate: 1 day
 

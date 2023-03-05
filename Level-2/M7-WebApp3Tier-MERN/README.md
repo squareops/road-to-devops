@@ -4,7 +4,7 @@ In this module, we will do hands-on up-on How to build and deploy a MERN Stack A
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [MERN stack deployment](https://github.com/maithelys/rtd/blob/main/Level-2/M7-WebApp3Tier-MERN/L01-MERN.md)  |
+|  L01    | [MERN stack deployment](L01-MERN.md)  |
 
 #### Module Completion Estimate: 7-10 days
 

@@ -44,7 +44,7 @@ route:
 receivers:
 - name: 'email'
   email_configs:
-  - to: 'maithely@squareops.com,abc@xyz.com'
+  - to: 'devops@squareops.com,abc@xyz.com'
     require_tls: yes
 inhibit_rules:
   - source_match:

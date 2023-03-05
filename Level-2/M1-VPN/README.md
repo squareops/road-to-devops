@@ -4,9 +4,9 @@ This module gives a brief description of Virtual Private Networks and why is it 
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [What is VPN ?](https://github.com/maithelys/rtd/blob/main/Level-2/M1-VPN/L01-WhatIsVPN.md)  |
-|  L02    | [How does VPN work ?](https://github.com/maithelys/rtd/blob/main/Level-2/M1-VPN/L02-HowDoesVPNWork.md)  |
-|  L03    | [Install Pritunl VPN ](https://github.com/maithelys/rtd/blob/main/Level-2/M1-VPN/L03-InstallVPN.md)  |
+|  L01    | [What is VPN ?](L01-WhatIsVPN.md)  |
+|  L02    | [How does VPN work ?](L02-HowDoesVPNWork.md)  |
+|  L03    | [Install Pritunl VPN ](L03-InstallVPN.md)  |
 
 #### Module Completion Estimate: 4 days for beginners and 2 days for an intermediate  
 

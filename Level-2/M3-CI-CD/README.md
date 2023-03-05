@@ -4,9 +4,9 @@ This module gives an overview of pipelines in DevOps and hands-on examples in th
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [What are pipelines in DevOps ?](https://github.com/maithelys/rtd/blob/main/Level-2/M3-CI-CD/L01-PipelineOverview.md)  |
-|  L02    | [Introduction to CodePipeline ](https://github.com/maithelys/rtd/blob/main/Level-2/M3-CI-CD/L02-AWSCodepipeline.md)  |
-|  L03    | [Creating Code Pipeline ](https://github.com/maithelys/rtd/blob/main/Level-2/M3-CI-CD/L03-CodePipelineHandsOn.md)  |
+|  L01    | [What are pipelines in DevOps ?](L01-PipelineOverview.md)  |
+|  L02    | [Introduction to CodePipeline ](L02-AWSCodepipeline.md)  |
+|  L03    | [Creating Code Pipeline ](L03-CodePipelineHandsOn.md)  |
 
 #### Module Completion Estimate: 1 Week
 
