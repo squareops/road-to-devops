@@ -30,7 +30,7 @@ These are the following steps that you need to follow when deploying the WORDPRE
 
 1. Use an isolated networking environment to deploy all the AWS resources such as EC2 and RDS 
 
-2. Deploy a VPN server using the following document to [Install VPN](M1-VPN/L03-InstallVPN.md) 
+2. Deploy a VPN server using the following document to [Install VPN](/../road-to-devops/Level-2/M1-VPN/L03-InstallVPN.md) 
 
 3. Deploy RDS in this same VPC for MySQL inside a private Subnet
 
