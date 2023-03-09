@@ -6,9 +6,10 @@ This module shows the DevOps tools used for infrastructure deployment such as te
 |---------|----------------|
 |  L01    | [What is Terraform ? ](L01-WhatIsTerraform.md)  |
 |  L02    | [Introduction to Terraform  ](L02-TerraformBasics.md)  |
-|  L03    | [What is AMI Packer ? ](L03-AMIpacker.md)  |
-|  L04    | [What is Ansible ? ](L04-WhatIsAnisible.md)  |
-|  L05    | [Difference between Terraform and Ansible ](L05-TerraformVSAnsible.md)  |
+|  L03    | [Terraform Modules ](L03-TerraformModules.md)  |
+|  L04    | [What is AMI Packer ? ](L04-AMIpacker.md)  |
+|  L05    | [What is Ansible ? ](L05-WhatIsAnisible.md)  |
+|  L06    | [Difference between Terraform and Ansible ](L06-TerraformVSAnsible.md)  |
 
 #### Module Completion Estimate: 1 Week
 
