@@ -229,8 +229,38 @@ Last step is to click on "Continue to CodePipeline"
   ![](Images/p16.png)
 
 Now click on next and add code deploy stage 
-Here is the buildpec.yml file configuration which is stored in the root directory of the github repository 
 
+Here is the buildpec.yml file configuration which is stored in the root directory of the github repository 
+```
+version: 0.2
+
+run-as: root
+
+env:
+  parameter-store:
+    DB_NAME: "/road_to_devops/wordpress/DB_NAME"
+    DB_USER: "/road_to_devops/wordpress/DB_USER"
+    DB_PASSWORD: "/road_to_devops/wordpress/DB_PASSWORD"
+    DB_HOST: "/road_to_devops/wordpress/DB_HOST"
+
+phases:
+  install:
+    commands:
+      - apt update -y
+  pre_build:
+    commands:
+      - sed -i 's/database_name_here/'$DB_NAME'/' wp-config.php
+      - sed -i 's/username_here/'$DB_USER'/' wp-config.php
+      - sed -i 's/password_here/'$DB_PASSWORD'/' wp-config.php
+      - sed -i 's/localhost/'$DB_HOST'/' wp-config.php
+      - cat wp-config.php
+  build:
+    commands:
+      - grep -Fq "road_to_devops" wp-config.php
+artifacts:
+  files:
+    - '**/*'
+```
 
 - The buildspec file basically contains the information about variables to be taken from and then pre-build, build and post build steps.
 
