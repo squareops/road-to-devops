@@ -30,7 +30,7 @@ These are the following steps that you need to follow when deploying the WORDPRE
 
 1. Use an isolated networking environment to deploy all the AWS resources such as EC2 and RDS 
 
-2. Deploy a VPN server using the following document to [Install VPN](/Level-2/M1-VPN/L03-InstallVPN.md) 
+2. Deploy a VPN server using the following document to [Install VPN](https://github.com/squareops/road-to-devops/blob/develop/Level-2/M1-VPN/L03-InstallVPN.md) 
 
 3. Deploy RDS in this same VPC for MySQL inside a private Subnet
 
@@ -410,7 +410,7 @@ Example: For public subnets take CIDR 10.0.1.0/24 and 10.0.2.0/24 and for privat
 # Step-2: Install Pritunl on EC2 instance  
 We will create one EC2 instances in public subnet and we will define name as Jump Server or Bastion Server in which Security Group(SG) should only allow SSH 
 
-Using this document you can [install pritunl vpn client on the ec2 server](M1-VPN/L03-InstallVPN.md) 
+Using this document you can [install pritunl vpn client on the ec2 server](https://github.com/squareops/road-to-devops/blob/develop/Level-2/M1-VPN/L03-InstallVPN.md) 
 
 # Step-3: Create role to connect using session manager 
 
