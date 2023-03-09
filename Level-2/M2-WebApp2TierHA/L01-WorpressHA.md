@@ -776,6 +776,10 @@ define('NONCE_SALT',       'VALUES COPIED FROM THE COMMAND LINE');
 ```
 Next, let’s modify some of the database connection settings at the beginning of the file. You’ll have to adjust the database name, the database user, and the associated password that was configured within MySQL.
 
+Also add this FS_METHOD in the database configurations 
+
+    define( 'FS_METHOD', 'direct' );
+
 The other change you should make is to set the method that WordPress uses to write to the filesystem. Since you’ve given the web server permission to write where it needs to, you can explicitly set the filesystem method to “direct”. Failure to set this with our current settings would result in WordPress prompting for FTP credentials when we perform some actions. Add this setting below the database connection settings, or anywhere else in the file:
 
 Edit the file **/var/www/your_domain/wp-config.php** with the db credentials 
