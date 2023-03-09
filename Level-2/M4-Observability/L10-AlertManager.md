@@ -1,3 +1,6 @@
+## AlertManager 
+The Alertmanager handles alerts sent by client applications such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integration such as email, PagerDuty, or OpsGenie. It also takes care of silencing and inhibition of alerts.
+
 ## Alerting in Prometheus using alert manger by running the following commands:
 
 ```

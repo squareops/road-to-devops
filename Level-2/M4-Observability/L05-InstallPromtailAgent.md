@@ -1,3 +1,15 @@
+## Promtail Agent 
+
+Promtail is an agent which ships the contents of local logs to a private Grafana Loki instance or Grafana Cloud. It is usually deployed to every machine that has applications needed to be monitored.
+
+It primarily:
+
+- Discovers targets.
+  
+- Attaches labels to log streams.
+  
+- Pushes them to the Loki instance.
+  
 ## Install PROMTAIL AGENT by running the following command on ubuntu server
 ```
 curl -s https://api.github.com/repos/grafana/loki/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep promtail-linux-amd64.zip | wget -i -

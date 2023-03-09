@@ -1,3 +1,7 @@
+## BlackBox Exporter 
+
+Blackbox Exporter is used for endpoint monitoring and can help generate meaningful uptime and availability metrics. Blackbox Exporter can probe endpoints over HTTP, HTTPS, DNS, TCP, and ICMP. While most exporters accept static configurations and expose metrics accordingly, Blackbox Exporter works a little differently.
+
 ## Install Blackbox exporter to monitor http/https endpoints by running the following commands:
 ```
 $ wget https://github.com/prometheus/blackbox_exporter/releases/download/v0.14.0/blackbox_exporter-0.14.0.linux-amd64.tar.gz
@@ -13,7 +17,6 @@ $ sudo chown -R blackbox:blackbox /etc/blackbox/*
 $ cd /lib/systemd/system
 ```
 ## create service file:
-
 ```
 
 $ sudo touch blackbox.service

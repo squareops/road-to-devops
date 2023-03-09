@@ -1,3 +1,7 @@
+## Node Exporter 
+
+The Prometheus Node Exporter exposes a wide variety of hardware and kernel-related metrics. Node Exporter is installed on all the nodes, for which we need to scrape Node Metrics such as cpu utilization, ram available, disk used etc 
+
 ## Monitoring EC2 instance uisng  NODE Exporter by using the following commands:
 ```
 https://devopscube.com/monitor-linux-servers-prometheus-node-exporter/ 

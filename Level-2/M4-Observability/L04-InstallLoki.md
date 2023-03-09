@@ -1,4 +1,20 @@
-# Install LOKI by running the following command on ubuntu server
+# LOKI
+
+Loki is a log aggregation system designed to store and query logs from all your applications and infrastructure. Loki takes a unique approach by only indexing the metadata rather than the full text of the log lines.
+
+Loki’s minimal indexing approach means that storing the same set of logs in Loki requires far less storage than with other solutions
+
+- Log any and all formats
+- Fast writes
+- Tiny indexes
+- Cheaper to run
+- Simpler to operate
+- Fast queries
+- Cut and slice your logs in dynamic ways (Flexible)
+  
+  ![](Images/r4.png)
+
+## Install LOKI by running the following command on ubuntu server
 
 ```
 curl -s https://api.github.com/repos/grafana/loki/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep loki-linux-amd64.zip | wget -i -

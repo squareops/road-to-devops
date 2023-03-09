@@ -1,3 +1,7 @@
+## MongoDB Exporter 
+MongoDB exporter handles ALL metrics exposed by MongoDB monitoring commands. It loops over all the fields exposed in diagnostic commands and tries to get data from them.
+
+
 ## Scrape MONGODB METRICS from EC2 instances using MONGODB EXPORTER by using the following commands
 ```
 $ mkdir mongodb-exporter
