@@ -1,6 +1,6 @@
 # LEVEL 1 
 
-## This section has various modules which will help you to learn DevOps Jobs from scratch.
+## This section has various modules which will help you to learn DevOps Concepts from scratch.
 
 | Module |   Description  |
 |---------|----------------|
