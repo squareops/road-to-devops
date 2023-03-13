@@ -54,6 +54,7 @@ The workflow is to search through repositories for charts and install them to Ku
 The files and directories of a Helm chart each have a specific function:
 
 | Name	| Type	| Function |
+|-------|-------|----------|
 |charts/|	Directory	| Directory for manually managed chart dependencies.|
 |templates/|	Directory |	Template files are written in Golang and combined with configuration values from the values.yaml file to generate Kubernetes manifests.|
 |Chart.yaml|	File | 	Metadata about the chart, such as the version, name, search keywords, etc.|
