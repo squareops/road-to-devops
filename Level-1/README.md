@@ -7,7 +7,7 @@
 |  M02    | [Linux Fundamentals used in the day to day basis ](M2-LinuxFundamentals)  |
 |  M03    | [Networking basics and OSI model ](M3-Networking)  |
 |  M04    | [Overview of the AWS cloud service provider with various AWS services ](M4-AWSBasics)  |
-|  M05    | [Hands on implementation of deploying WORDPRESS application on server ](M4-WebApp2Tier)  |
+|  M05    | [Hands on implementation of deploying WORDPRESS application on server ](M5-WebApp2Tier)  |
 |  M06    | [Introduction to Bash Scripts ](M6-Bashscripts)  |
 |  M07    | [Overview of Docker and Kubernetes   ](M7-Containerization)  |
 
