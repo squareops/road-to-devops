@@ -24,7 +24,7 @@ Amazon Elastic Container Registry (Amazon ECR) is an AWS managed container image
 ## Components of Amazon ECR
 Amazon ECR contains the following components:
 
-**Registry** : An Amazon ECR private registry is provided to each AWS account; you can create one or more repositories in your registry and store images in them. 
+**Registry**: An Amazon ECR private registry is provided to each AWS account; you can create one or more repositories in your registry and store images in them. 
 
 **Authorization token**: Your client must authenticate to Amazon ECR registries as an AWS user before it can push and pull images. 
 
@@ -32,4 +32,4 @@ Amazon ECR contains the following components:
 
 **Repository policy** : You can control access to your repositories and the images within them with repository policies. 
 
-**Image**:You can push and pull container images to your repositories. You can use these images locally on your development system, or you can use them in Amazon ECS task definitions and Amazon EKS pod specifications. ]
+**Image**: You can push and pull container images to your repositories. You can use these images locally on your development system, or you can use them in Amazon ECS task definitions and Amazon EKS pod specifications. ]

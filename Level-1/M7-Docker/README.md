@@ -1,5 +1,6 @@
 # Module 7: Containerization
-This module includes all the containerization tools being used in DevOps. Starting from docker concepts and then moving to Kubernetes. 
+
+This module includes all the containerization tools being used in DevOps i.e starting with the Docker Concepts and then moving on with the Hands-on deployment with Dockerfile 
 
 | Lecture |   Description  |
 |---------|----------------|
