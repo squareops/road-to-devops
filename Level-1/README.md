@@ -12,4 +12,4 @@
 |  M07    | [Overview of Docker and Kubernetes   ](M7-Containerization)  |
 
 
-#### Note: For a beginner, it will take up to 2-3 weeks to complete Level 1 but for an intermediate person Level 1 can be completed within 1-2 weeks  
+#### Note: For a beginner, it will take up to 2-3 weeks to complete Level 1 but for an intermediate person Level 1 can be completed within 1-2 weeks 
