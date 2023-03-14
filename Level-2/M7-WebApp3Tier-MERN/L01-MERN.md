@@ -19,15 +19,13 @@ In this post we are going to setup a production ready web server from scratch on
       - [CLOUD WATCH AGENT](#cloud-watch-agent)
   - [STEP 4: Create Instance in Private Subnet for nodejs application with the created template.](#step-4-create-instance-in-private-subnet-for-nodejs-application-with-the-created-template)
   - [STEP 5: Create Load Balancer](#step-5-create-load-balancer)
-  - [STEP 5: Codebuild configuration](#step-5-codebuild-configuration)
-  - [STEP 6: Create a domain in Route 53](#step-6-create-a-domain-in-route-53)
-  - [STEP 7: Attach domain with the load balancer.](#step-7-attach-domain-with-the-load-balancer)
-  - [STEP 8: Create a launch template from the AMI and use that in autoscaling group.](#step-8-create-a-launch-template-from-the-ami-and-use-that-in-autoscaling-group)
+  - [STEP 5: Create a launch template from the AMI and use that in autoscaling group.](#step-5-create-a-launch-template-from-the-ami-and-use-that-in-autoscaling-group)
+  - [STEP 6: Setup code deploy](#step-6-setup-code-deploy)
+  - [STEP 7: Store environment variables](#step-7-store-environment-variables)
+  - [STEP 8: Codebuild Configurations](#step-8-codebuild-configurations)
+  - [STEP 9: Codepipeline Configurations](#step-9-codepipeline-configurations)
+  - [STEP 10: Create a domain in Route 53](#step-10-create-a-domain-in-route-53)
   - [STEP 9: Frontend Amplify setup](#step-9-frontend-amplify-setup)
-  - [STEP 10: Testing](#step-10-testing)
-  - [STEP 11: Create PIPELINE with the configuration as follows](#step-11-create-pipeline-with-the-configuration-as-follows)
-    - [SLACK INTEGRATION IN PIPELINE](#slack-integration-in-pipeline)
-    - [MONITORING](#monitoring)
 
 ## What is MERN Stack Application ?
 
@@ -929,249 +927,156 @@ Now check that target group has been attached to the loadbalancer
 
 ![](Images/b47.png)
 
-Lastly click on create loadbalancer and check that load balancer has been created sucessfully 
+Lastly click on create loadbalancer and check that load balancer has been created successfully 
 
+Now add listener as follows 
 
-### STEP 5: Codebuild configuration 
-Code Saved to GITHUB and here is the Link: https://github.com/RohitSquareops/BackEndNodeJS
+![](Images/b73.png)
 
--  Create a CodeBuild project and keep configurations as follows
- 
-Project Name: Squareops_NodeJS_Backend
+**note: allow port 80 and 443 from everywhere in alb sg**
 
- ![](Images/a23.png)
+### STEP 5: Create a launch template from the AMI and use that in autoscaling group.
 
-Configuration:
+Create launch template with following configurations 
 
- ![](Images/a24.png)
+![](Images/b48.png)
+![](Images/b49.png)
+![](Images/b50.png)
+![](Images/b51.png)
 
-Source 
+Launch AutoScaling group using the launch template created above 
 
- ![](Images/a25.png)
+![](Images/b52.png)
+![](Images/b53.png)
+![](Images/b54.png)
+![](Images/b55.png)
 
-Environment
+now click on next and create AutoScaling group 
 
- ![](Images/a26.png)
+### STEP 6: Setup code deploy
 
+click on **create application** in code deploy 
 
-Artifact
+![](Images/b56.png)
 
- ![](Images/a27.png)
+now enter the application name and compute type, then click on **create application**
 
- ![](Images/a28.png)
+![](Images/b57.png)
 
+create deployment group with following configurations 
 
-S3 BUCKET
-Name: squareops-nodejs-bucket
+![](Images/b58.png)
+![](Images/b59.png)
+![](Images/b60.png)
 
- ![](Images/a29.png)
+now click on **create deployment group**
 
-CODE DEPLOY
+**note: allow port 300 from alb-sg in backend-sg**
 
-Application Name: BackEndNodeJS
+### STEP 7: Store environment variables 
 
- ![](Images/a30.png)
+We are using parameter store in systems manager to store DB_URL 
 
+![](Images/b60.png)
 
-Deployment Group Name: BackEndNodeJS_DG
+### STEP 8: Codebuild Configurations
 
- ![](Images/a31.png)
+clone the code from github : https://github.com/RohitSquareops/BackEndNodeJS
 
+Create the build project with the following configurations
 
-### STEP 6: Create a domain in Route 53
+![](Images/b61.png)
 
-- Domain Name: rtd.squareops.co.in
-- Sub-Domain Name: namesquareops.rtd.squareops.co.in
+![](Images/b62.png)
 
- ![](Images/a32.png)
+![](Images/b63.png)
 
-- Note: Website Result with Subdomain name:
+![](Images/b64.png)
 
- ![](Images/a33.png)
+![](Images/b65.png)
 
+click on **create build project**
 
-### STEP 7: Attach domain with the load balancer.
+Now also add **ssmfullaccess** policy in code build role
 
-We will make a request for a certificate with our fully qualified domain name and create a canonical name in route 53 along with making required changes in load balancer for port forwarding with ACM certificate attachment.
+![](Images/b71.png)
 
-Certificate Status:
+### STEP 9: Codepipeline Configurations
 
- ![](Images/a34.png)
+Create Code pipeline with the following configurations 
 
+![](Images/b66.png)
 
-Create Record in route53
+![](Images/b67.png)
 
- ![](Images/a35.png)
+![](Images/b68.png)
 
-Additional Details
+![](Images/b69.png)
 
- ![](Images/a36.png)
+Now click on next and review the pipeline, then click on **create pipeline**
 
-Making port forwarding in Load Balancer
+### STEP 10: Create a domain in Route 53
 
- ![](Images/a37.png)
+- Domain Name: labs.squareops.in
+- Sub-Domain Name: backend.labs.squareops.in
 
- ![](Images/a38.png)
+![](Images/b72.png)
 
- ![](Images/a39.png)
+now test the url
 
- ![](Images/a40.png)
-
-- Note: Website Result with Subdomain and ACM certificate
-
- ![](Images/a41.png)
-
-### STEP 8: Create a launch template from the AMI and use that in autoscaling group.
-
-- Launch template Name: Squareops_Backend_ASG_Template
-
- ![](Images/a42.png)
-
-- Autoscaling Group Name: Squareops_BAckend_ASG
-
- ![](Images/a43.png)
-
- ![](Images/a44.png)
-
-
-- SPOT INSTANCE IN AUTO SCALING STRATEGY
-
-Launch Template
-
- ![](Images/a45.png)
-
-Modify Auto Scaling with Spot instance Template
-
- ![](Images/a46.png)
-
-Instance Creating with SPOT type.
-
- ![](Images/a47.png)
-
+![](Images/b74.png)
 
 ### STEP 9: Frontend Amplify setup
-We will first put our reactjs application code to github, later on we'll go to AWS and host a website under AWS AMPLIFY.
+- We will first put our reactjs application code to github
 
 - Link to GITHUB Application: https://github.com/RohitSquareops/FrontEndReactJS
 
-- We will give our backend domain name to the application for connectivity.
+- On AWS AMPLIFY , We will first host a web application and choose our project location.
 
- ![](Images/a48.png)
+**CodeRepo**
 
-On AWS AMPLIFY , We will first host a web application and choose our project location.
+ ![](Images/b75.png)
 
-CodeRepo 
+**Repo connectivity**
 
- ![](Images/a49.png)
+ ![](Images/b76.png)
 
-Repo connectivity 
+ ![](Images/b77.png)
 
- ![](Images/a50.png)
+**Deployment**
 
-Hosting Details
+ ![](Images/b78.png)
 
- ![](Images/a51.png)
+**Set environment variables**
 
-Deployment 
+![](Images/b79.png)
 
- ![](Images/a52.png)
+**Amplyfy.yml configuration**
 
- ![](Images/a53.png)
+```
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm install
+    build:
+      commands:
+        - npm run build
+        - echo "BACKEND_URL=$DOMAIN_URL" >> backend/.env
+  artifacts:
+    # IMPORTANT - Please verify your build output directory
+    baseDirectory: /
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+```
+Amplify pipeline has been deployed successfully 
 
-### STEP 10: Testing
+![](Images/b80.png)
 
-After completing the full application architecture, We’ll now make some changes in both Backend app as well as the frontend app.
-In Backend Application, We will get the db connection string as a .env variable and use that in the application.As part of that will install “npm install dotenv --save” and some minor changes in app.js file so that it can read from .env.
-
- ![](Images/a54.png)
-
-In the Frontend application, we’ll create an env variable in AMPLIFY [need clarification and session]
-
- ![](Images/a55.png)
-
-
-In amplify.yml file we will add the env variable in .env file and later use in agent.js
-Amplify.yml
-
- ![](Images/a56.png)
-
-
-Help Resource: https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html
-
- ![](Images/a57.png)
-
-
-### STEP 11: Create PIPELINE with the configuration as follows
-
- ![](Images/a58.png)
-
- ![](Images/a59.png)
-
- ![](Images/a60.png)
-
- ![](Images/a61.png)
-
- ![](Images/a62.png)
-
-#### SLACK INTEGRATION IN PIPELINE
-
-![](Images/a63.png)
-
- ![](Images/a64.png)
-
-#### MONITORING
-Setup monitoring of Network, Servers, ASGs , ALB and Database. Configure alerts to slack
-
-DASHBOARD Name: Squareops-Dashboard
-
- ![](Images/a65.png)
-
-Alarms
-
- ![](Images/a66.png)
-
-Autoscale setting for Scale on CPU and Memory Basic
-
- ![](Images/a67.png)
-
-Setup for Instance memory utilization
-
- ![](Images/a68.png)
-
-LOG GROUP: We have two log groups now, One for CodeBuild and another for Node instance system log.
-
- ![](Images/a69.png)
-
-Retention Policy for log will be 3 days.
-
- ![](Images/a70.png)
-
-Metrics Filter on Syslog
-
- ![](Images/a71.png)
-
- ![](Images/a72.png)
-
-Alarm on Filter
-
-Name: Syslog_Warning_Alarm
-
- ![](Images/a73.png)
-
- ![](Images/a74.png)
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
+![](Images/b81.png)
 
 
