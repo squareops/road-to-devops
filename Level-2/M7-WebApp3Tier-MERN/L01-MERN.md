@@ -12,11 +12,10 @@ In this post we are going to setup a production ready web server from scratch on
   - [STEP 1: Create jump server](#step-1-create-jump-server)
   - [STEP 2: Setup Mongodb instances](#step-2-setup-mongodb-instances)
   - [STEP 3: Create AMI and setup EC2 instance for Backend Node JS application](#step-3-create-ami-and-setup-ec2-instance-for-backend-node-js-application)
-    - [Package Installation:](#package-installation)
-    - [Install CodeDeploy agent and CloudWatch agent](#install-codedeploy-agent-and-cloudwatch-agent)
-      - [CODE DEPLOY AGENT](#code-deploy-agent)
+    - [Package Installation (NODEJS, PM2)](#package-installation-nodejs-pm2)
+      - [Install CODE DEPLOY AGENT](#install-code-deploy-agent)
     - [Configure AWS-CLI](#configure-aws-cli)
-      - [CLOUD WATCH AGENT](#cloud-watch-agent)
+    - [Install CLOUD WATCH AGENT](#install-cloud-watch-agent)
   - [STEP 4: Create Instance in Private Subnet for nodejs application with the created template.](#step-4-create-instance-in-private-subnet-for-nodejs-application-with-the-created-template)
   - [STEP 5: Create Load Balancer](#step-5-create-load-balancer)
   - [STEP 5: Create a launch template from the AMI and use that in autoscaling group.](#step-5-create-a-launch-template-from-the-ami-and-use-that-in-autoscaling-group)
@@ -25,7 +24,7 @@ In this post we are going to setup a production ready web server from scratch on
   - [STEP 8: Codebuild Configurations](#step-8-codebuild-configurations)
   - [STEP 9: Codepipeline Configurations](#step-9-codepipeline-configurations)
   - [STEP 10: Create a domain in Route 53](#step-10-create-a-domain-in-route-53)
-  - [STEP 9: Frontend Amplify setup](#step-9-frontend-amplify-setup)
+  - [STEP 11: Frontend Amplify setup](#step-11-frontend-amplify-setup)
 
 ## What is MERN Stack Application ?
 
@@ -575,7 +574,7 @@ Create an instance in a public subnet and do the required package installation l
 
 Now SSH into the instance and run the following commands:
 
-#### Package Installation:
+#### Package Installation (NODEJS, PM2)
 
 ```
 apt update
@@ -589,9 +588,7 @@ Now verify the version installed
 
  ![](Images/b29.png)
 
-#### Install CodeDeploy agent and CloudWatch agent
-
-##### CODE DEPLOY AGENT
+##### Install CODE DEPLOY AGENT
 ```
 sudo apt update -y
 sudo apt install ruby-full -y
@@ -611,7 +608,7 @@ sudo ./aws/install
 ```
  ![](Images/b31.png)
 
-##### CLOUD WATCH AGENT
+#### Install CLOUD WATCH AGENT
 
 firstly add SSM FULL ACCESS policy to the IAM role attached to the instance
 
@@ -877,7 +874,7 @@ Now create the AMI of this instance on which all the configurations have been in
   
    ![](Images/b34.png)
 
-- Write the name of the AMI and click on 
+- Write the name of the AMI and click on **Create Image**
 
  ![](Images/b35.png)
 
@@ -977,7 +974,7 @@ now click on **create deployment group**
 
 We are using parameter store in systems manager to store DB_URL 
 
-![](Images/b60.png)
+![](Images/b70.png)
 
 ### STEP 8: Codebuild Configurations
 
@@ -1026,7 +1023,7 @@ now test the url
 
 ![](Images/b74.png)
 
-### STEP 9: Frontend Amplify setup
+### STEP 11: Frontend Amplify setup
 - We will first put our reactjs application code to github
 
 - Link to GITHUB Application: https://github.com/RohitSquareops/FrontEndReactJS
@@ -1080,3 +1077,8 @@ Amplify pipeline has been deployed successfully
 ![](Images/b81.png)
 
 
+**MERN STACK HAD BEEN DEPLOYED SUCCESSFULLY WITH THE FOLLOWING COMPONENTS:**
+
+1. 3 node mongodb setup is up and running in private subnets
+2. backend deployed on EC2 instance with private
+3. frontend deployed on Amplify 

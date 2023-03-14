@@ -1,23 +1,24 @@
 # About Docker Compose & Use cases.
-[1] with Compose, you use a YAML file to configure your application’s services. 
-Then, with a single command, you create and start all the services from your configuration.
+Docker Compose is a tool that was developed to help define and share multi-container applications. With Compose, we can create a YAML file to define the services and with a single command, can spin everything up or tear it all down.
 
-[2] Docker compose has commands for managing the whole lifecycle of your application
+1. with Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
+- All of your configuration in one file
+- Compose revolves around a config file called docker-compose.yml. In it we define all of our services. Think of a service as a part of your application; a database or API for example.
+- All of our services rely on an image with which we create a container. Spinning up a container can have many options; how these options are configured will be stored in the yml file.
 
-[3] What can docker compose do?
+2. What can docker compose do?
 - Start, stop, and rebuild services
 - View the status of running services
 - Stream the log output of running services
 - Run a one-off command on a service
 
-[4] Key Features of Compose
+3. Key Features of Compose
 - Have multiple isolated environments on a single host
 - Preserves volume data when containers are created
 - Only recreate containers that have changed
 - Supports variables and moving a composition between environments
 
-[5] Practice of Docker Compose
-
+4. Practice docker-compose using the following example 
 ## Prerequisites
 - Install Docker Engine and Docker Compose as standalone binaries
 - Install Docker Desktop which includes both Docker Engine and Docker Compose
@@ -131,3 +132,6 @@ redis_1  | 1:M 17 Aug 22:11:10.483 * Ready to accept connections
 Enter http://localhost:8000/ in a browser to see the application running
 
  ![](Images/docker22.png)
+
+For more information:
+[Beginners guide on Docker-compose ](https://towardsdatascience.com/docker-compose-for-absolute-beginners-how-does-it-work-and-how-to-use-it-examples-733ca24c5e6c)

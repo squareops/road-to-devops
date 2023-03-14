@@ -24,7 +24,11 @@ First of all you need to create your AWS account. You can sign up by following t
 Your credit card or debit card will be charge of minor value and it will be refunded once they verify it. Amazon offers a Free Usage Tier on which we will install WordPress, which is great to explore the services and even host real apps without being charged of single penny.
 
 ## 2. Deploy a networking stack 
-Now you need to setup an isolated networking environment in which the following AWS resources will be deployed using the cloudFormation template:
+Now you need to setup an isolated networking environment in which the following AWS resources will be deployed using the cloudFormation template. Here we will deploy minimal networking resources for the sandbox environment.
+
+**Note: It is not advisable to use the vpc_minimal stack for production environments**
+
+Using MINIMAL VPC stack the following AWS resources will be deployed 
 
 - VPC 
 - Public Subnets
@@ -512,3 +516,11 @@ In a web browser, enter the new site URL of your WordPress blog to verify that t
 That’s it.
 
 You have successfully created LAMP environment and installed WordPress on Amazon EC2.
+
+**KEY POINTS to remember after setup**
+
+1. wordpress site deployed on EC2 
+2. mysql db running on the same EC2 
+3. db configurations updated in wp-config.php file
+4. allow port 80 in the application security group
+5. DO NOT ALLOW port 22 from everywhere (0.0.0.0)
