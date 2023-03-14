@@ -53,6 +53,14 @@ This section has various modules which will help you to learn DevOps Job from sc
 
 #### Note: For a beginner, it will take up to 4-6 weeks to complete Level 2 but for an intermediate person Level 2 can be completed within 3-4 weeks  
 
+### LEVEL 3: Comprises of the Kubernetes concepts which we will launch SOON 
+
+- Introduction to Kubernetes with Hands-on
+- Installation & Configure K8s
+- Deploying using HELM Chart 
+- Observability on Kubernetes 
+- SAAS & Large scale deployments 
+
 ## Contribution & Issue Reporting
 
 To report an issue with a project:

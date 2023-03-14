@@ -8,22 +8,17 @@ In this post we are going to setup a production ready web server from scratch on
 - [GOALS](#goals)
 - [KEY POINTS TO FOLLOW](#key-points-to-follow)
 - [VPC ARCHITECTURE](#vpc-architecture)
-  - [SUBNETS](#subnets)
-  - [IGW](#igw)
-  - [ELASTIC IP](#elastic-ip)
-  - [NAT GATEWAY](#nat-gateway)
-  - [ROUTE TABLES](#route-tables)
-  - [Public Route Table:](#public-route-table)
-  - [Private Route Table:](#private-route-table)
-  - [Subnet Association:](#subnet-association)
 - [APPLICATION ARCHITECTURE](#application-architecture)
   - [STEP 1: Create jump server](#step-1-create-jump-server)
-  - [STEP 2: Create mongodb instances](#step-2-create-mongodb-instances)
+  - [STEP 2: Setup Mongodb instances](#step-2-setup-mongodb-instances)
   - [STEP 3: Create AMI and setup EC2 instance for Backend Node JS application](#step-3-create-ami-and-setup-ec2-instance-for-backend-node-js-application)
-      - [Install CodeDeploy agent and CloudWatch agent](#install-codedeploy-agent-and-cloudwatch-agent)
-        - [CODE DEPLOY AGENT:](#code-deploy-agent)
-        - [CLOUD WATCH AGENT](#cloud-watch-agent)
+    - [Package Installation:](#package-installation)
+    - [Install CodeDeploy agent and CloudWatch agent](#install-codedeploy-agent-and-cloudwatch-agent)
+      - [CODE DEPLOY AGENT](#code-deploy-agent)
+    - [Configure AWS-CLI](#configure-aws-cli)
+      - [CLOUD WATCH AGENT](#cloud-watch-agent)
   - [STEP 4: Create Instance in Private Subnet for nodejs application with the created template.](#step-4-create-instance-in-private-subnet-for-nodejs-application-with-the-created-template)
+  - [STEP 5: Create Load Balancer](#step-5-create-load-balancer)
   - [STEP 5: Codebuild configuration](#step-5-codebuild-configuration)
   - [STEP 6: Create a domain in Route 53](#step-6-create-a-domain-in-route-53)
   - [STEP 7: Attach domain with the load balancer.](#step-7-attach-domain-with-the-load-balancer)
@@ -56,83 +51,373 @@ This tutorial is focused on setting a Cloud server on AWS EC2 then deployment an
 ## VPC ARCHITECTURE
 For the complete VPC architecture we will first create a VPC and then we will create subnets (Public and Private) and associate them with Route Tables . We will create an Internet Gateway and a NAT Gateway to route traffic for subnets along with that will create a EIP and map it with NAT Gateway. 
 
-- VPC Name: Squareops_VPC
-- CIDR_Block: 192.168.0.0/16
+We will deploy a secure network stack on cloudFormation which will create these AWS resources 
+- VPC 
+- Public Subnets 
+- Private Subnets 
+- Route Tables 
+- IGW 
+- NAT 
+- NAT EIP
 
- ![](Images/a1.png)
+Create a yaml file with name "vpc_secure.yml" and store it on your local system. Then paste the following code in it. 
 
-### SUBNETS
-As per the architectural requirements, We will create two public and two private subnet so that we can have robust architecture.
+```
+AWSTemplateFormatVersion: 2010-09-09
+Description: This template will deploy a work station
+Metadata: 
+  AWS::CloudFormation::Interface: 
+   ParameterGroups: 
+      - Label: 
+          default: "Configurations"
+        Parameters: 
+          - VpcCIDR
+          - PublicSubnet1ID
+          - PublicSubnet2ID
+          - PrivateSubnet1ID
+          - PrivateSubnet2ID
+          - KeyPairName
+          - AppSG
+          - ALBSecurityGroup
+          - amiId
+          - InstanceVolumeSize
+          - InstanceType
+          - min
+          - max
+          - DesiredCapacity
+          - CPUPolicyTargetValue
+          - SSLCert
+          - OnDemandBaseCapacity
+          - OnDemandPercentageAboveBaseCapacity
+          - SpotMaxPrice
+          - EstimatedInstanceWarmup
+          - HealthCheckPath
 
-- Public Subnets:
-Names: Squareops_Public_subnet_1 && Squareops_Public_subnet_2
-CIDR_Blocks: 192.168.1.0/24 && 192.168.2.0/24
+Parameters:
+  VpcCIDR:
+    Description: Enter the Ip range (CIDR notation) for this VPC
+    Type: String
+    Default: 10.0.0.0/16
+  PublicSubnet1CIDR:
+    Description: CIDR for public subnet 1.
+    Type: String
+    Default: 10.0.1.0/24
+  PublicSubnet2CIDR:
+    Description: CIDR for public subnet 2.
+    Type: String
+    Default: 10.0.2.0/24
+  PrivateSubnet1CIDR:
+    Description: CIDR for private subnet 1.
+    Type: String
+    Default: 10.0.3.0/24
+  PrivateSubnet2CIDR:
+    Description: CIDR for private subnet 2.
+    Type: String
+    Default: 10.0.4.0/24
+  KeyPairName: 
+    Description: Amazon EC2 Key Pair
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: must be a valid Key Pair
+  AppSG:
+    Description: Name of application security group. 
+    Type: AWS::EC2::SecurityGroup::Id
+  ALBSecurityGroup:
+    Description: Name of LoadBalancer security group. 
+    Type: AWS::EC2::SecurityGroup::Id
+  amiId:
+    Description: Ami id of the machine for private network
+    Type: String 
+    AllowedPattern: '[-a-zA-Z0-9]*'
+    ConstraintDescription: must contain only alphanumeric characters.
+  InstanceVolumeSize:
+    Description: Application instance EBS volume size in GiBs.
+    Type: Number
+    Default: 30
+  InstanceType:
+    Description: WebServer EC2 instance type for Private network.Refer:- https://aws.amazon.com/ec2/instance-types/
+    Type: String
+    Default: t3a.medium
+    AllowedValues:
+    - t3a.medium
+    ConstraintDescription: must be a valid EC2 instance type.
+  min:
+    Description: Minimum Ec2 instances for Auto Scaling group.
+    Default: 2
+    Type: Number
+  max:
+    Description: Maximum Ec2 instances for Auto Scaling group.
+    Default: 6
+    Type: Number
+  DesiredCapacity:
+    Description: The number to ec2 instances you want to launch.
+    Type: Number
+    Default: 2
+  CPUPolicyTargetValue:
+    Description: Target value for Target based scaling group.
+    Default: 60
+    Type: Number
+  SSLCert:
+    Description: SSL Certificate ARN
+    Type: String
+    ConstraintDescription: must be a valid Certificate ARN
+  OnDemandBaseCapacity:
+    Description: Minimum numer of OnDemand instances to launched for AutoScaling.
+    Type: Number
+    Default: 2
+  OnDemandPercentageAboveBaseCapacity:
+    Description: for example, 20 specifies 20% On-Demand Instances, 80% Spot Instances
+    Type: Number
+    Default: 50
+  SpotMaxPrice:
+    Description: Maximum Bid price for spot instance. It depends on instance size.
+    Type: Number
+    Default: 0.005
+  EstimatedInstanceWarmup:
+    Description: Instance Warmup time for ASG
+    Type: Number
+    Default: 300
+  HealthCheckPath:
+    Description: Instance Warmup time for ASG
+    Type: String
+    Default: /
 
- ![](Images/a2.png)
+#Resources to be created
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: "default"
+      Tags:
+      - Key: Name
+        Value: !Sub vpc-${AWS::StackName}
 
-- Private Subnets:
-Names: Squareops_Private_subnet_1 && Squareops_Private_subnet_2
-CIDR_Blocks: 192.168.3.0/24 && 192.168.4.0/24
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+      - Key: Name
+        Value: !Sub IGW-${AWS::StackName}
 
- ![](Images/a3.png)
+  AttachIGW:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
 
-### IGW
-Enables resources (like EC2 instances) in your public subnets to connect to the internet if the resource has a public IPv4 address or an IPv6 address and associate it with VPC.
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PublicSubnet1ID
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ '0', !GetAZs '' ]
+      MapPublicIpOnLaunch: true       #it will assign public ip on launch
+      Tags:
+      - Key: Name
+        Value: !Sub Public-Subnet1-${AWS::StackName}
 
-Name: Squareops_IGW
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PublicSubnet2ID
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ '1', !GetAZs '' ]
+      MapPublicIpOnLaunch: true       #it will assign public ip on launch
+      Tags:
+      - Key: Name
+        Value: !Sub Public-Subnet2-${AWS::StackName}
 
- ![](Images/a4.png)
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PrivateSubnet1ID
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ '0', !GetAZs '' ]
+      Tags:
+      - Key: Name
+        Value: !Sub Private-Subnet1-${AWS::StackName}  
 
-### ELASTIC IP
-Name: Squareops_EIP
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PrivateSubnet2ID
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ '1', !GetAZs '' ]
+      Tags:
+      - Key: Name
+        Value: !Sub Private-Subnet2-${AWS::StackName} 
 
- ![](Images/a5.png)
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+      - Key: Name
+        Value: !Sub PublicRouteTable-${AWS::StackName}
 
-### NAT GATEWAY
-Name: Squareops_NAT_Gateway
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
 
- ![](Images/a6.png)
+  PublicSubnet1RouteTableAssoication:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet1
 
-### ROUTE TABLES
-To route the traffic inside VPC we need to have a route table, so we can set rules to route traffic. As per the need, we will create one Private and one Public route table and associate subnets and gateways as required.
+  PublicSubnet2RouteTableAssoication:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet2
 
- ![](Images/a7.png)
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+      - Key: Name
+        Value: !Sub PrivateRouteTable-${AWS::StackName}
+
+  PrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NAT
+
+  PrivateSubnet1RouteTableAssoication:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref PrivateSubnet1
+
+  PrivateSubnet2RouteTableAssoication:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref PrivateSubnet2
+  
+  DeployAppLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateData:
+        ImageId: !Ref amiId
+        InstanceType: !Ref InstanceType
+        KeyName: !Ref KeyPairName
+        BlockDeviceMappings:
+          - DeviceName: '/dev/sda1'
+            Ebs: 
+              DeleteOnTermination: true
+              Encrypted: false
+              VolumeSize: !Ref InstanceVolumeSize
+              VolumeType: gp2
+        IamInstanceProfile:
+          Arn:
+            Fn::GetAtt:
+            - S3accessProfile
+            - Arn
+        SecurityGroupIds:
+          - !Ref AppSG
+
+  DeployAppASG:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      VPCZoneIdentifier: 
+        - !Ref PrivateSubnet1ID
+        - !Ref PrivateSubnet2ID
+      DesiredCapacity: !Ref DesiredCapacity
+      TargetGroupARNs:
+        - !Ref WebAppTargetGroup
+      MaxSize: !Ref max
+      MinSize: !Ref min
+      MixedInstancesPolicy:
+        InstancesDistribution:
+          OnDemandAllocationStrategy: prioritized
+          OnDemandBaseCapacity: !Ref OnDemandBaseCapacity
+          OnDemandPercentageAboveBaseCapacity: !Ref OnDemandPercentageAboveBaseCapacity
+          SpotAllocationStrategy: lowest-price
+          SpotInstancePools: 3
+          SpotMaxPrice: !Ref SpotMaxPrice
+        LaunchTemplate:
+          LaunchTemplateSpecification:
+            LaunchTemplateId: !Ref DeployAppLaunchTemplate
+            Version: !GetAtt DeployAppLaunchTemplate.LatestVersionNumber
+      Tags:
+          - Key: Name
+            Value: !Sub ASG-${AWS::StackName}
+            PropagateAtLaunch: True
+    UpdatePolicy:
+      AutoScalingReplacingUpdate:
+        WillReplace: True
+
+  AppScalingPolicy:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AutoScalingGroupName: !Ref DeployAppASG
+      PolicyType: TargetTrackingScaling 
+      EstimatedInstanceWarmup: !Ref EstimatedInstanceWarmup #-> 30
+      TargetTrackingConfiguration:
+        PredefinedMetricSpecification:
+          PredefinedMetricType: ASGAverageCPUUtilization
+        TargetValue: !Ref CPUPolicyTargetValue
 
 
-### Public Route Table: 
-In the Public route table we will associate Public Subnets and associate the route with the Internet Gateway.
+Outputs:
+  VPCID:
+    Description: VPC
+    Value: !Ref VPC
+  PublicSubnet1:
+    Description: Public Subnet1
+    Value: !Ref PublicSubnet1
+  PublicSubnet2:
+    Description: Public Subnet1
+    Value: !Ref PublicSubnet2
+  PrivateSubnet1:
+    Description: Private Subnet1
+    Value: !Ref PrivateSubnet1
+    Export:
+      Name: !Sub "${AWS::StackName}-PrivateSubnet1ID"
+  PrivateSubnet2:
+    Description: Private Subnet1
+    Value: !Ref PrivateSubnet2
+    Export:
+      Name: !Sub "${AWS::StackName}-PrivateSubnet2ID"
+  ASG:
+    Description: Information about the Auto scaling group
+    Value: !Ref DeployAppASG
+  AppSecruityGroup:
+    Description: Application security group
+    Value: !Ref AppSG
+  ALBSG:
+    Description: application load balancer security group. 
+    Value: !Ref ALBSecurityGroup
 
-- Name: Squareops_Public_Route_Table
-- Associated with IGW: Squareops_IGW
-- Associated Subnets Name: Squareops_Public_subnet_1 && Squareops_Public_subnet_2
+```
+Next go the cloudFormation AWS service and upload the yml file as follows, then click on next 
 
- ![](Images/a8.png)
+![](Images/b1.png)
 
-- Subnet Associations:
+Enter the stack name and click on next 
 
- ![](Images/a9.png)
+![](Images/b2.png)
 
-### Private Route Table:
-In the Public route table we will associate Private Subnets and associate the route with NAT Gateway so that the instances in the private subnet can go to the internet.
+Review the stack and submit 
 
-- Name: Squareops_Private_Route_Table
-- Associated with NAT Gateway: Squareops_NAT_Gateway
-- Associated Subnets Name: Squareops_Private_subnet_1 && Squareops_Private_subnet_2
+![](Images/b3.png)
 
- ![](Images/a10.png)
+Now check the AWS resources created after successful stack deployment 
 
-
-### Subnet Association:
-
- ![](Images/a11.png)
-
-- NOTE: VPC complete architecture completed with all details and screenshots.
+![](Images/b4.png)
 
 ## APPLICATION ARCHITECTURE
 
-As we have completed the complete architecture of VPC, We will now move to create resources 
-and infrastructure for our application.
-For that we will follow these steps:
+As we have completed with the architecture of VPC, We will now move to create resources and infrastructure for our application.For that we will follow these steps:
 1. Create a jump server in the public subnet so that we can connect to the instances Inside private subnet.
 2. Create Mongo db instances in a private subnet and have 2 replicas for failover.
 3. We will create an AMI for the Nodejs application installation setup so that we can have a template for the instance creation.
@@ -149,43 +434,56 @@ For that we will follow these steps:
 14. Monitoring
 
 ### STEP 1: Create jump server 
-Create a jump server in the public subnet so that we can connect to the instancesInside private subnet. We will have a security group with SSH permission.
- - Name: Squareops_Jump_Server
- - Type: t3a.small
- - Key: Squareops_Jump_Server_Key
- - Subnet: Squareops_Public_Subnet_1
- - SG: Squareops_Jump_Server_SG[allow 22 port in inbound rules ]
- - Storage: gp2 , 8GB
+Create a jump server in the public subnet so that we can connect to the instances Inside private subnet. We will have a security group with SSH permission.
 
- ![](Images/a12.png)
+Now go to EC2 dashboard and launch an EC2 instance with the following configurations 
 
-Security Group:
+1. Click on launch instance 
 
- ![](Images/a13.png)
+![](Images/b5.png)
 
+2. Write the name and choose OS as ubuntu 
+    
+![](Images/b6.png)
 
-### STEP 2: Create mongodb instances
+3. Next choose instance type as **t3a.small** and select the key pair 
+   
+![](Images/b7.png)
+
+4. Select the vpc which you have deployed earlier and choose the public subnet, then create a new security group
+   
+![](Images/b8.png)
+
+5. Lastly choose the storage as 8gb and if you want to connect using ssm, you can attach role in advanced settings 
+   
+![](Images/b9.png)
+  
+### STEP 2: Setup Mongodb instances
+
 Create Mongo db instances in a private subnet and have 2 replicas for failover.
-- Primary DB Name: db-master
-- Replication DB Names: db-node-1 && db-node-2
-- Type: t3a.small
-- Key: Squareops_DB_Server_Key 
-- Availability Zone:
-     - For Primary DB: ap-south-1a
-     - For Replication DB: ap-south-1b
-- Subnet: 
-     - For Primary DB: Squareops_Private_Subnet_1
-     - For Replication DB: Squareops_Private_Subnet_2
-- SG: Squareops_DB_Server_SG[allow 27017 port in inbound rules ]
-- Storage: gp2 , 8GB
+- Primary DB Name: mongodb-master
+- Replication DB Names: mongodb-node-1 && mongodb-node-2
 
- ![](Images/a14.png)
+1. Click on launch instance and use the following configurations to launch 3 instances 
 
-Security Group:
+Enter the name for master mongodb and later you can update the name for secondary mongodb nodes using EC2 console 
+![](Images/b10.png)
+![](Images/b11.png)
+![](Images/b12.png)
+![](Images/b13.png)
+![](Images/b14.png)
 
- ![](Images/a15.png)
+2. Verify all the 3 instances are launched in private subnet and hence **NO PUBLIC IP** is attached to these instances 
 
-Installation Steps:
+![](Images/b17.png)
+
+3. Allow port 27017 in mongodb security group 
+
+![](Images/b18.png)
+
+4. Now SSH into the each DB instance and run the following commands  
+   
+**Installation Steps:**
 ```
 apt update
 sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
@@ -194,79 +492,369 @@ sudo add-apt-repository 'deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu   
 sudo apt install mongodb-org -y
 sudo systemctl start mongod
 sudo systemctl enable mongod
+sudo systemctl status mongod
 mongo --eval 'db.runCommand({ connectionStatus: 1 })'
-Open sudo vi /etc/mongod.conf
-      Modify bindIp to 0.0.0.0 && add Replication set as
+```
+![](Images/b15.png)
+
+- Open sudo vi /etc/mongod.conf
+    - Modify bindIp to 0.0.0.0 
+    - add Replication set as
      replication:
           replSetName: rs0
-sudo systemctl restart mongod
-```
-- Note: To make one instance Primary, login to that instance and initiate it and add the other two instances as replicas.
 
-On the primary instance, create a user for authentication.
+![](Images/b16.png)
+
+- Now restart the mongodb service 
+
+      sudo systemctl restart mongod
+
+![](Images/b19.png)    
+
+5. To make one instance Primary, login to that instance and initiate it and add the other two instances as replicas.
+
+Run the following command to login into the mongo shell of primary/master node
+
+    mongo 
+
+![](Images/b20.png)
+
+On the primary instance, add the worker nodes 
 
 ```
 rs.initiate();
+```
+![](Images/b21.png)
+
+```
 rs.add(‘worker1PrivateIP:27017’);
 rs.add(‘worker2PrivateIP:27017’);
+
+```
+![](Images/b22.png)
+
+```
  rs.status();
+```
+![](Images/b23.png)
+
+**create a user for authentication.**
+
+```
 use admin;
+
 db.createUser(
 {	user: "UserName",
 	pwd: "Password",
 
 	roles:[{role: "userAdminAnyDatabase" , db:"admin"}]})
 ```
-Here is the mongodb connection string:
+
+![](Images/b24.png)
+
+Now exit the mongo shell and connect with the mongodb string in the following format 
 ```
-mongodb://squareopsuser:sqops321password@10.0.3.60:27017,10.0.4.237:27017,10.0.4.130:27017/conduit?authSource=admin&replicaSet=rs0
+mongodb://roadtodevops:Roadtodevops123@10.0.4.163:27017,10.0.4.20:27017,10.0.4.38:27017/conduit?authSource=admin&replicaSet=rs0
 ```
+
+![](Images/b25.png)
 
 ### STEP 3: Create AMI and setup EC2 instance for Backend Node JS application
+
 Create an instance in a public subnet and do the required package installation like Nodejs,PM2, CodeDeploy Agent, CloudWatch Agent and make a template from that.After creating a template we can terminate the instance or can stop it, if we have further use.
-- Name: Squareops_Node_Backend_Pub
+
+- Name: road-to-devops-backend
 - Type: t3a.small
-- Key: Squareops_Web_Server_Key
-- Subnet: Squareops_Public_Subnet_1
-- SG: Squareops_Web_Server_SG[allow port 22 and 3000 in inbound rules]
+- Subnet: Public_Subnet_1
+- SG: road-to-devops-backend-sg [allow port 22 and 3000 in inbound rules]
 - Storage: gp2 , 8GB
 
- ![](Images/a16.png)
+![](Images/b26.png)
 
-Package Installation:
+![](Images/b27.png)
+
+![](Images/b28.png)
+
+Now SSH into the instance and run the following commands:
+
+#### Package Installation:
 
 ```
 apt update
-apt -get install net-tools -y
+apt install net-tools -y
 curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get install gcc make -y
 apt-get install nodejs -y 
 npm  install pm2@latest -g
 ```
-##### Install CodeDeploy agent and CloudWatch agent
+Now verify the version installed 
 
-###### CODE DEPLOY AGENT:
+ ![](Images/b29.png)
+
+#### Install CodeDeploy agent and CloudWatch agent
+
+##### CODE DEPLOY AGENT
 ```
 sudo apt update -y
 sudo apt install ruby-full -y
-wget https://aws-codedeploy-region.s3.region.amazonaws.com/latest/install
+wget https://aws-codedeploy-region.s3.region.amazonaws.com/latest/install (update the region)
 chmod +x ./install
 sudo ./install auto
 sudo service codedeploy-agent status
 ```
-###### CLOUD WATCH AGENT
-```
-   Configure aws:
-         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-   unzip awscliv2.zip
-   sudo ./aws/install
+ ![](Images/b30.png)
 
+#### Configure AWS-CLI
+
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+ ![](Images/b31.png)
+
+##### CLOUD WATCH AGENT
+
+firstly add SSM FULL ACCESS policy to the IAM role attached to the instance
+
+ ![](Images/b32.png)
+
+Now run the following commands to install cloudwatch agent 
+
+```
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb
 sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
 sudo apt-get update && sudo apt-get install collectd
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 ```
-- Do manual setup
+Here it will ask few questions for monitoring metrics and logs, answer then accordingly 
+
+```
+root@ip-10-0-1-76:~# sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+================================================================
+= Welcome to the Amazon CloudWatch Agent Configuration Manager =
+=                                                              =
+= CloudWatch Agent allows you to collect metrics and logs from =
+= your host and send them to CloudWatch. Additional CloudWatch =
+= charges may apply.                                           =
+================================================================
+On which OS are you planning to use the agent?
+1. linux
+2. windows
+3. darwin
+default choice: [1]:
+
+Trying to fetch the default region based on ec2 metadata...
+Are you using EC2 or On-Premises hosts?
+1. EC2
+2. On-Premises
+default choice: [1]:
+
+Which user are you planning to run the agent?
+1. root
+2. cwagent
+3. others
+default choice: [1]:
+
+Do you want to turn on StatsD daemon?
+1. yes
+2. no
+default choice: [1]:
+
+Which port do you want StatsD daemon to listen to?
+default choice: [8125]
+
+What is the collect interval for StatsD daemon?
+1. 10s
+2. 30s
+3. 60s
+default choice: [1]:
+
+What is the aggregation interval for metrics collected by StatsD daemon?
+1. Do not aggregate
+2. 10s
+3. 30s
+4. 60s
+default choice: [4]:
+
+Do you want to monitor metrics from CollectD? WARNING: CollectD must be installed or the Agent will fail to start
+1. yes
+2. no
+default choice: [1]:
+
+Do you want to monitor any host metrics? e.g. CPU, memory, etc.
+1. yes
+2. no
+default choice: [1]:
+
+Do you want to monitor cpu metrics per core?
+1. yes
+2. no
+default choice: [1]:
+
+Do you want to add ec2 dimensions (ImageId, InstanceId, InstanceType, AutoScalingGroupName) into all of your metrics if the info is available?
+1. yes
+2. no
+default choice: [1]:
+
+Do you want to aggregate ec2 dimensions (InstanceId)?
+1. yes
+2. no
+default choice: [1]:
+
+Would you like to collect your metrics at high resolution (sub-minute resolution)? This enables sub-minute resolution for all metrics, but you can customize for specific metrics in the output json file.
+1. 1s
+2. 10s
+3. 30s
+4. 60s
+default choice: [4]:
+
+Which default metrics config do you want?
+1. Basic
+2. Standard
+3. Advanced
+4. None
+default choice: [1]:
+
+Current config as follows:
+{
+        "agent": {
+                "metrics_collection_interval": 60,
+                "run_as_user": "root"
+        },
+        "metrics": {
+                "aggregation_dimensions": [
+                        [
+                                "InstanceId"
+                        ]
+                ],
+                "append_dimensions": {
+                        "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
+                        "ImageId": "${aws:ImageId}",
+                        "InstanceId": "${aws:InstanceId}",
+                        "InstanceType": "${aws:InstanceType}"
+                },
+                "metrics_collected": {
+                        "collectd": {
+                                "metrics_aggregation_interval": 60
+                        },
+                        "disk": {
+                                "measurement": [
+                                        "used_percent"
+                                ],
+                                "metrics_collection_interval": 60,
+                                "resources": [
+                                        "*"
+                                ]
+                        },
+                        "mem": {
+                                "measurement": [
+                                        "mem_used_percent"
+                                ],
+                                "metrics_collection_interval": 60
+                        },
+                        "statsd": {
+                                "metrics_aggregation_interval": 60,
+                                "metrics_collection_interval": 10,
+                                "service_address": ":8125"
+                        }
+                }
+        }
+}
+Are you satisfied with the above config? Note: it can be manually customized after the wizard completes to add additional items.
+1. yes
+2. no
+default choice: [1]:
+
+Do you have any existing CloudWatch Log Agent (http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html) configuration file to import for migration?
+1. yes
+2. no
+default choice: [2]:
+
+Do you want to monitor any log files?
+1. yes
+2. no
+default choice: [1]:
+2
+Saved config file to /opt/aws/amazon-cloudwatch-agent/bin/config.json successfully.
+Current config as follows:
+{
+        "agent": {
+                "metrics_collection_interval": 60,
+                "run_as_user": "root"
+        },
+        "metrics": {
+                "aggregation_dimensions": [
+                        [
+                                "InstanceId"
+                        ]
+                ],
+                "append_dimensions": {
+                        "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
+                        "ImageId": "${aws:ImageId}",
+                        "InstanceId": "${aws:InstanceId}",
+                        "InstanceType": "${aws:InstanceType}"
+                },
+                "metrics_collected": {
+                        "collectd": {
+                                "metrics_aggregation_interval": 60
+                        },
+                        "disk": {
+                                "measurement": [
+                                        "used_percent"
+                                ],
+                                "metrics_collection_interval": 60,
+                                "resources": [
+                                        "*"
+                                ]
+                        },
+                        "mem": {
+                                "measurement": [
+                                        "mem_used_percent"
+                                ],
+                                "metrics_collection_interval": 60
+                        },
+                        "statsd": {
+                                "metrics_aggregation_interval": 60,
+                                "metrics_collection_interval": 10,
+                                "service_address": ":8125"
+                        }
+                }
+        }
+}
+Please check the above content of the config.
+The config file is also located at /opt/aws/amazon-cloudwatch-agent/bin/config.json.
+Edit it manually if needed.
+Do you want to store the config in the SSM parameter store?
+1. yes
+2. no
+default choice: [1]:
+
+What parameter store name do you want to use to store your config? (Use 'AmazonCloudWatch-' prefix if you use our managed AWS policy)
+default choice: [AmazonCloudWatch-linux]
+
+Trying to fetch the default region based on ec2 metadata...
+Which region do you want to store the config in the parameter store?
+default choice: [us-east-1]
+
+Which AWS credential should be used to send json config to parameter store?
+1. ASIAUP4W3X5URxxXUPQJ5T(From SDK)
+2. Other
+default choice: [1]:
+
+Please make sure the creds you used have the right permissions configured for SSM access.
+Which AWS credential should be used to send json config to parameter store?
+1. ASIAUP4W3X5URxxXUPQJ5T(From SDK)
+2. Other
+default choice: [1]:
+
+Successfully put config to parameter store AmazonCloudWatch-linux.
+Program exits now.
+root@ip-10-0-1-76:~#
+```
+
+- You can also Do manual setup:
+
 ```
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
 ```
@@ -275,49 +863,73 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-c
 
           vi  /opt/aws/amazon-cloudwatch-agent/bin/config.json
 
-- Check Status of Agent
-
-          /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a status
-
 - To Start
 
           /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a start
 
+- Check Status of Agent
 
-- Create a template.
-Name: SquareopsNodeJsAMI
+          /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a status
 
- ![](Images/a17.png)
+ ![](Images/b33.png)
+
+Now create the AMI of this instance on which all the configurations have been installed 
+
+- Go to the EC2 dashboard console and select **actions** from the drop down list, then click on **create image**
+  
+   ![](Images/b34.png)
+
+- Write the name of the AMI and click on 
+
+ ![](Images/b35.png)
 
 ### STEP 4: Create Instance in Private Subnet for nodejs application with the created template.
-- Name: Squareops_Node_Backend
+- Name: road-to-devops-backend
 - Type: t3a.small
-- AMI: SquareopsNodeJsAMI
-- Key: Squareops_Web_Server_Key
-- Subnet: Squareops_Private_Subnet_1
-- SG: Squareops_Web_Server_SG
+- AMI: backend-ami
+- Subnet: Private_Subnet
 
- ![](Images/a18.png)
+ ![](Images/b36.png)
 
-- Load Balancer Configuration
+ ![](Images/b37.png)
 
-We will first create a target group and attach it with the  load balancer.
+  ![](Images/b38.png)
 
-- Target Group Name: Squareops-nodejs-CICD-TG
+### STEP 5: Create Load Balancer 
 
- ![](Images/a19.png)
+Click on **create loadbalancer**
 
-- Load Balancer Name: Squareops-Nodejs-Balancer
+ ![](Images/b39.png)
 
- ![](Images/a20.png)
+Now choose application loadbalancer and click on next
 
-- Security Group: Squareops_NodeJS_Balancer_SG
+ ![](Images/b40.png)
 
- ![](Images/a21.png)
+Enter the name of loadbalancer and keep **internet facing**
 
-- Note: Website result with Load Balancer 
+ ![](Images/b41.png)
 
- ![](Images/a22.png)
+Choose public subnets 
+
+ ![](Images/b42.png)
+
+Create a new security group for alb
+
+ ![](Images/b46.png)
+
+Create target group with following configuration 
+
+![](Images/b43.png)
+
+![](Images/b44.png)
+
+![](Images/b45.png)
+
+Now check that target group has been attached to the loadbalancer 
+
+![](Images/b47.png)
+
+Lastly click on create loadbalancer and check that load balancer has been created sucessfully 
 
 
 ### STEP 5: Codebuild configuration 
