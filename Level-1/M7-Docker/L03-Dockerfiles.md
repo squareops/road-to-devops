@@ -53,5 +53,6 @@ You declare VOLUME  in your Dockerfile to denote where your container will write
 ## MULTISTAGE DOCKERFILE:	
 A multistage build allows you to use multiple images to build a final product. In a multistage build, you have a single Dockerfile, but can define multiple images inside it to help build the final image. In this post, you’ll learn about the core concepts of multistage builds in Docker and how they help to create production-grade images.
 
-### For more information:
+### For more information refer the following link
+
 [Multistage Dockerfile](https://cloudnweb.dev/2019/10/crafting-multi-stage-builds-with-docker-in-node-js/)

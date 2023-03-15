@@ -7,3 +7,7 @@ Using Docker Networking, an isolated package can be communicated. Docker contain
 - Overlay - Overlay offers Swarm services to communicate with each other. It enables containers to run on the different docker host.
 
 ![](Images/docker20.png)
+
+## For more information refer the following
+
+[Docker Networking Overview](https://docs.docker.com/network/)

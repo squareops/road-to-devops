@@ -22,6 +22,7 @@
 - [Step-6: Create Application Load Balancer and Target Group .](#step-6-create-application-load-balancer-and-target-group-)
 - [Step-7: Creating Auto Scaling Group in the Private Subnet of VPC.](#step-7-creating-auto-scaling-group-in-the-private-subnet-of-vpc)
 - [Step-8: Map subdomain with the Load Balancer .](#step-8-map-subdomain-with-the-load-balancer-)
+- [KEY POINTS to remember after the setup:](#key-points-to-remember-after-the-setup)
 
 # Overview
 In computing, the term availability is used to describe the period of time when a service is available, as well as the time required by a system to respond to a request made by a user. High availability is a quality of a system or component that assures a high level of operational performance for a given period of time.
@@ -890,7 +891,16 @@ c. Now try to check the same by hitting the domain that we mapped to load balanc
 
 ![](Images/e29.png)
 
-
+# KEY POINTS to remember after the setup:
+1. Secure Network stack deployed which can be used in production environments 
+2. Printul JUMP server deployed in public subnet (or you can use SSM IAM role for SSH into the instance)
+3. Mysql RDS deployed in private network ( save the DB credentials )
+4. Wordpress Application deployed with NGINX webserver in private subent
+5. Storing DB Credentials in wp-config.php
+6. Using Route 53 for Domain Management 
+7. Allow port 3306 in DB security group
+8. Allow only port 80 and 443 in loadbalancer security group
+9. Allow traffic in application security with ALB security group and DB security group 
 
 
 

@@ -40,10 +40,10 @@ Using this blog, you can setup the [WordPress Website](https://github.com/square
 
 ## Step - 2: Upload Source code on Github 
 
-- For this example we have taken source code from squareops-road-to-devops-wordpress-repository (https://github.com/AadeshBhardwaj/wordpress-ci-cd )
+- For this example we have taken source code from squareops repository (https://github.com/sq-ldc/wordpress-example)
 
 
-                git clone 
+                git clone https://github.com/sq-ldc/wordpress-example
 
 ## Step – 3: Create Code Pipeline 
 

@@ -20,6 +20,11 @@ Amazon ECR contains the following components:
 
 **Image**: You can push and pull container images to your repositories. You can use these images locally on your development system, or you can use them in Amazon ECS task definitions and Amazon EKS pod specifications. 
 
-## For more information 
-- [on docker hub](https://www.geeksforgeeks.org/what-is-docker-hub/)
+## For more information refer the following
+
+[Docker Hub](https://www.geeksforgeeks.org/what-is-docker-hub/)
+
+[Docker Registry](https://jfrog.com/knowledge-base/docker-hub-and-docker-registries-a-beginners-guide/)
+
+[Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html)
 

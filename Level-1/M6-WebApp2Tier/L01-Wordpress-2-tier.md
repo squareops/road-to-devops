@@ -524,3 +524,4 @@ You have successfully created LAMP environment and installed WordPress on Amazon
 3. db configurations updated in wp-config.php file
 4. allow port 80 in the application security group
 5. DO NOT ALLOW port 22 from everywhere (0.0.0.0)
+6. Check the webserver being used (like in this blog Apache is used )
