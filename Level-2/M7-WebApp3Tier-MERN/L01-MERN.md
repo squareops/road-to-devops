@@ -1083,10 +1083,9 @@ Amplify pipeline has been deployed successfully
 
 ### STEP 13: Observability (Monitoring & Logging)
 
-Use can check Cloudwatch metrics for monitoring and log groups  
+Use can check Cloudwatch metrics for monitoring and log groups for these AWS resources 
 - ec2 nodes 
 - application loadbalancer 
-- endpoints monitoring
 
 ![](Images/d1.png)
 
