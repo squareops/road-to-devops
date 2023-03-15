@@ -979,8 +979,7 @@ We are using parameter store in systems manager to store DB_URL
 
 ### STEP 8: Codebuild Configurations
 
-clone the code from github : https://github.com/RohitSquareops/BackEndNodeJS
-
+clone the code from github : https://github.com/sq-ldc/nodejs-example
 Create the build project with the following configurations
 
 ![](Images/b61.png)
@@ -1027,7 +1026,7 @@ now test the url
 ### STEP 11: Frontend Amplify setup
 - We will first put our reactjs application code to github
 
-- Link to GITHUB Application: https://github.com/RohitSquareops/FrontEndReactJS
+- Link to GITHUB Application: https://github.com/sq-ldc/reactjs-example
 
 - On AWS AMPLIFY , We will first host a web application and choose our project location.
 
