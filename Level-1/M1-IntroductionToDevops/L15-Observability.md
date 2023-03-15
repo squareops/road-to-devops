@@ -39,7 +39,7 @@ Prometheus is a monitoring solution for storing time series data like metrics. G
 
 Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the applications you run on AWS in real time. You can use CloudWatch to collect and track metrics, which are variables you can measure for your resources and applications.
 
-- [Installation and usage of cloudWatch agent](https://docs.google.com/document/d/1Ty2-g3fjQtML_mbf5IkXUXUyj13uXN34/edit)
+- [Installation and usage of cloudWatch agent](https://github.com/squareops/road-to-devops/blob/develop/Level-2/M4-Observability/L01-InstallCloudWatchAgent.md)
 
 #### What is Loki and Promtail?
 
