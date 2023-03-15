@@ -24,5 +24,5 @@ Continuous deployment is not the same thing as continuous delivery, although the
 - Codeship
 - Google Cloud Deployment Manager
 
-### For more information :
-https://www.atlassian.com/continuous-delivery/principles/pipeline
+### For more information check the below link 
+[Continuous Delivery Overview](https://www.atlassian.com/continuous-delivery/principles/pipeline)

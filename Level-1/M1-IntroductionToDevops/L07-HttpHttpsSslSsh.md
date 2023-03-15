@@ -49,7 +49,7 @@ SSH means “Secure Shell”. It has a built-in username/password authentication
 
 HTTP means HyperText Transfer Protocol. HTTP is the underlying protocol used by the World Wide Web and this protocol defines how messages are formatted and transmitted, and what actions Web servers and browsers should take in response to various commands.
 
-#### For more information 
+#### For more information check the below links
 
 [Why Is HTTP not secure ?](https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/)
 
