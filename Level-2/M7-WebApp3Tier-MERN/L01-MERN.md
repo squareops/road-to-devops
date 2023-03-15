@@ -13,7 +13,7 @@ In this post we are going to setup a production ready web server from scratch on
   - [STEP 2: Setup Mongodb instances](#step-2-setup-mongodb-instances)
   - [STEP 3: Create AMI and setup EC2 instance for Backend Node JS application](#step-3-create-ami-and-setup-ec2-instance-for-backend-node-js-application)
     - [Package Installation (NODEJS, PM2)](#package-installation-nodejs-pm2)
-      - [Install CODE DEPLOY AGENT](#install-code-deploy-agent)
+    - [Install CODE DEPLOY AGENT](#install-code-deploy-agent)
     - [Configure AWS-CLI](#configure-aws-cli)
     - [Install CLOUD WATCH AGENT](#install-cloud-watch-agent)
   - [STEP 4: Create Instance in Private Subnet for nodejs application with the created template.](#step-4-create-instance-in-private-subnet-for-nodejs-application-with-the-created-template)
@@ -589,7 +589,7 @@ Now verify the version installed
 
  ![](Images/b29.png)
 
-##### Install CODE DEPLOY AGENT
+#### Install CODE DEPLOY AGENT
 ```
 sudo apt update -y
 sudo apt install ruby-full -y

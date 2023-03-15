@@ -43,7 +43,7 @@ Amazon CloudWatch is basically a metrics repository. An AWS service—such as Am
 14. Codebuild
 15. Chatbot
 
-### Such as if we take an example for EC2 instances, so we will monitor these main metrics:
+### Let's say if we take an example for EC2 instances, so we will monitor these essential metrics:
 1. CPU utilization 
 2. RAM utilization 
 3. Disk usage
@@ -52,7 +52,7 @@ Amazon CloudWatch is basically a metrics repository. An AWS service—such as Am
 1. [EC2 metrics](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html) 
 2. [ALB metrics](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-cloudwatch-metrics.html)
 3. [RDS metrics](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-metrics.html)
-4. 
+   
 ## Install the unified CloudWatch agent on the AMI and use SSM Parameter store to configure unified CloudWatch agent
 
 1. Installation of unified CloudWatch Agent on EC2 instance

@@ -58,7 +58,5 @@ We have also added the Healthy and Unhealthy host count on cloudwatch dashboard 
 
 ![](Images/a2.png)
 
-Snip of generated target group for ALB.
-
 
 
