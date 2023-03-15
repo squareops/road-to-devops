@@ -20,7 +20,8 @@
 
         - [stop EC2 instances](https://github.com/sq-ia/aws-stop-start-services/blob/develop/ec2-instances-stop-start/stop-EC2.md) 
 
-        - [stop RDS](https://github.com/sq-ia/aws-stop-start-services/blob/develop/rds-stop-start/stop-RDS.md)
+        - [stop RDS](https://github.com/sq-ia/aws-stop-start-services/blob/develop/rds-stop-start/stop-RDS.md
+        - )
 
     - ##### Do not push AWS account Access keys / Secret keys to any git repository.
 

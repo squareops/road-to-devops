@@ -13,7 +13,7 @@ This module gives a brief description of DevOps and what tools are required to b
 |  L07    | [Review networking security and protocols. (HTTP, HTTPS, SSL, SSH)](L07-HttpHttpsSslSsh.md)  |
 |  L08    |  [Understand Infrastructure as Code.](L08-IAC.md)   |
 |  L09    |  [Understand Containerization, Docker & Kubernetes](L09-Containerization.md) |
-|  L10    | [Understand Configuration Orchestration](L09-Containerization.md)   |
+|  L10    | [Understand Configuration Orchestration](L10-ConfigurationOrchestration.md)   |
 |  L11    | [Understand Configuration Management](L11-ConfigurationManagement.md)  |
 |  L12    |  [Explore Source Code Management and Build Tool Integration Techniques for Continuous Integration (CI)](L12-CI.md)  |
 |  L13    |  [Learn How To Advance Continuous Integration For Continuous Testing (Continuous Delivery)](L13-CD.md) |
