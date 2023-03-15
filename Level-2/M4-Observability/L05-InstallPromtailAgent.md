@@ -63,3 +63,5 @@ EOF
 
         - systemctl status promtail.service
 
+
+## Note : Use will get hands-on upon Observability tools in LEVEL 3 

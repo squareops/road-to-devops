@@ -25,6 +25,7 @@ In this post we are going to setup a production ready web server from scratch on
   - [STEP 9: Codepipeline Configurations](#step-9-codepipeline-configurations)
   - [STEP 10: Create a domain in Route 53](#step-10-create-a-domain-in-route-53)
   - [STEP 11: Frontend Amplify setup](#step-11-frontend-amplify-setup)
+  - [STEP 12: Observability (Monitoring \& Logging)](#step-12-observability-monitoring--logging)
 
 ## What is MERN Stack Application ?
 
@@ -1076,9 +1077,21 @@ Amplify pipeline has been deployed successfully
 
 ![](Images/b81.png)
 
+### STEP 12: Observability (Monitoring & Logging)
+
+Use can check Cloudwatch metrics and log groups for monitoring 
+- ec2 nodes 
+- application loadbalancer 
+- endpoints monitoring
+
+![](Images/d1.png)
 
 **MERN STACK HAD BEEN DEPLOYED SUCCESSFULLY WITH THE FOLLOWING COMPONENTS:**
 
 1. 3 node mongodb setup is up and running in private subnets
 2. backend deployed on EC2 instance with private
 3. frontend deployed on Amplify 
+4. DB connection string stored as ENVIRONMENT VARIABLE in AWS parameter store.
+5. In the loadbalancer security group, just allow ports 80 and 443 from everywhere (0.0.0.0)
+6. In the application security group, allow traffic from loadbalancer security group 
+7. domain management is done using AWS ROUTE 53 

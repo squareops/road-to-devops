@@ -113,3 +113,5 @@ Name: Loki
 URL: http://127.0.0.1:3100
 click SAVE & TEST
 ```
+
+## Note : Use will get hands-on upon Observability tools in LEVEL 3 
