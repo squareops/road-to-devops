@@ -1092,7 +1092,7 @@ Use can check Cloudwatch metrics for monitoring and log groups
 
 **MERN STACK HAD BEEN DEPLOYED SUCCESSFULLY WITH THE FOLLOWING COMPONENTS:**
 
-1. 3 node mongodb setup is up and running in private subnets
+1. Three node mongodb setup is up and running in private subnets
 2. backend deployed on EC2 instance with private
 3. frontend deployed on Amplify 
 4. DB connection string stored as ENVIRONMENT VARIABLE in AWS parameter store.
