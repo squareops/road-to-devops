@@ -18,14 +18,14 @@ In this post we are going to setup a production ready web server from scratch on
     - [Install CLOUD WATCH AGENT](#install-cloud-watch-agent)
   - [STEP 4: Create Instance in Private Subnet for nodejs application with the created template.](#step-4-create-instance-in-private-subnet-for-nodejs-application-with-the-created-template)
   - [STEP 5: Create Load Balancer](#step-5-create-load-balancer)
-  - [STEP 5: Create a launch template from the AMI and use that in autoscaling group.](#step-5-create-a-launch-template-from-the-ami-and-use-that-in-autoscaling-group)
-  - [STEP 6: Setup code deploy](#step-6-setup-code-deploy)
-  - [STEP 7: Store environment variables](#step-7-store-environment-variables)
-  - [STEP 8: Codebuild Configurations](#step-8-codebuild-configurations)
-  - [STEP 9: Codepipeline Configurations](#step-9-codepipeline-configurations)
-  - [STEP 10: Create a domain in Route 53](#step-10-create-a-domain-in-route-53)
-  - [STEP 11: Frontend Amplify setup](#step-11-frontend-amplify-setup)
-  - [STEP 12: Observability (Monitoring \& Logging)](#step-12-observability-monitoring--logging)
+  - [STEP 6: Create a launch template from the AMI and use that in autoscaling group.](#step-6-create-a-launch-template-from-the-ami-and-use-that-in-autoscaling-group)
+  - [STEP 7: Setup code deploy](#step-7-setup-code-deploy)
+  - [STEP 8: Store environment variables](#step-8-store-environment-variables)
+  - [STEP 9: Codebuild Configurations](#step-9-codebuild-configurations)
+  - [STEP 10: Codepipeline Configurations](#step-10-codepipeline-configurations)
+  - [STEP 11: Create a domain in Route 53](#step-11-create-a-domain-in-route-53)
+  - [STEP 12: Frontend Amplify setup](#step-12-frontend-amplify-setup)
+  - [STEP 13: Observability (Monitoring \& Logging)](#step-13-observability-monitoring--logging)
 
 ## What is MERN Stack Application ?
 
@@ -48,6 +48,8 @@ This tutorial is focused on setting a Cloud server on AWS EC2 then deployment an
 
 ## VPC ARCHITECTURE
 For the complete VPC architecture we will first create a VPC and then we will create subnets (Public and Private) and associate them with Route Tables . We will create an Internet Gateway and a NAT Gateway to route traffic for subnets along with that will create a EIP and map it with NAT Gateway. 
+
+**This network stack can be used in deploying any production environment**
 
 We will deploy a secure network stack on cloudFormation which will create these AWS resources 
 - VPC 
@@ -933,7 +935,7 @@ Now add listener as follows
 
 **note: allow port 80 and 443 from everywhere in alb sg**
 
-### STEP 5: Create a launch template from the AMI and use that in autoscaling group.
+### STEP 6: Create a launch template from the AMI and use that in autoscaling group.
 
 Create launch template with following configurations 
 
@@ -951,7 +953,7 @@ Launch AutoScaling group using the launch template created above
 
 now click on next and create AutoScaling group 
 
-### STEP 6: Setup code deploy
+### STEP 7: Setup code deploy
 
 click on **create application** in code deploy 
 
@@ -971,18 +973,21 @@ now click on **create deployment group**
 
 **note: allow port 300 from alb-sg in backend-sg**
 
-### STEP 7: Store environment variables 
+### STEP 8: Store environment variables 
 
 We are using parameter store in systems manager to store DB_URL 
 
 ![](Images/b70.png)
 
-### STEP 8: Codebuild Configurations
+### STEP 9: Codebuild Configurations
 
-clone the code from github : https://github.com/sq-ldc/nodejs-example
+clone the code from github: https://github.com/sq-ldc/nodejs-example
+
 Create the build project with the following configurations
 
 ![](Images/b61.png)
+
+Either you can choose a public repo with the above github link or you can clone the code and setup a GITHUB REPOSITORY for your project, then use it under private repository 
 
 ![](Images/b62.png)
 
@@ -998,7 +1003,7 @@ Now also add **ssmfullaccess** policy in code build role
 
 ![](Images/b71.png)
 
-### STEP 9: Codepipeline Configurations
+### STEP 10: Codepipeline Configurations
 
 Create Code pipeline with the following configurations 
 
@@ -1012,7 +1017,7 @@ Create Code pipeline with the following configurations
 
 Now click on next and review the pipeline, then click on **create pipeline**
 
-### STEP 10: Create a domain in Route 53
+### STEP 11: Create a domain in Route 53
 
 - Domain Name: labs.squareops.in
 - Sub-Domain Name: backend.labs.squareops.in
@@ -1023,7 +1028,7 @@ now test the url
 
 ![](Images/b74.png)
 
-### STEP 11: Frontend Amplify setup
+### STEP 12: Frontend Amplify setup
 - We will first put our reactjs application code to github
 
 - Link to GITHUB Application: https://github.com/sq-ldc/reactjs-example
@@ -1076,7 +1081,7 @@ Amplify pipeline has been deployed successfully
 
 ![](Images/b81.png)
 
-### STEP 12: Observability (Monitoring & Logging)
+### STEP 13: Observability (Monitoring & Logging)
 
 Use can check Cloudwatch metrics and log groups for monitoring 
 - ec2 nodes 
@@ -1094,3 +1099,6 @@ Use can check Cloudwatch metrics and log groups for monitoring
 5. In the loadbalancer security group, just allow ports 80 and 443 from everywhere (0.0.0.0)
 6. In the application security group, allow traffic from loadbalancer security group 
 7. domain management is done using AWS ROUTE 53 
+8. Network stack deployed can be used in production environments 
+9. CI/CD setup for both backend and frontend 
+10. 
