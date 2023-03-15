@@ -26,7 +26,7 @@ Your credit card or debit card will be charge of minor value and it will be refu
 ## 2. Deploy a networking stack 
 Now you need to setup an isolated networking environment in which the following AWS resources will be deployed using the cloudFormation template. Here we will deploy minimal networking resources for the sandbox environment.
 
-**Note: It is not advisable to use the vpc_minimal stack for production environments**
+**Note: It is not advisable to use this stack for production environments, this is only for learning purpose**
 
 Using MINIMAL VPC stack the following AWS resources will be deployed 
 
@@ -514,14 +514,18 @@ Search and replace the old site URL in your WordPress installation with the foll
 
 In a web browser, enter the new site URL of your WordPress blog to verify that the site is working properly again.
 That’s it.
-
+Also you can update using the following command
+```
+UPDATE wp_options SET option_value = replace(option_value, 'oldurl.com', 'newurl.com') WHERE option_name = 'home' OR option_name = 'siteurl';
+```
 You have successfully created LAMP environment and installed WordPress on Amazon EC2.
 
 **KEY POINTS to remember after setup**
 
-1. wordpress site deployed on EC2 
-2. mysql db running on the same EC2 
-3. db configurations updated in wp-config.php file
-4. allow port 80 in the application security group
-5. DO NOT ALLOW port 22 from everywhere (0.0.0.0)
+1. wordpress site deployed on EC2 in public subnet without any loadbalancer and HA setup
+2. mysql db running on the same EC2 instance and create user with required permissions
+3. DB configurations updated in wp-config.php file for connecting applicatio to database
+4. allow only port 80 in the application security group
+5. DO NOT ALLOW port 22 from everywhere (0.0.0.0), only add my-ip
 6. Check the webserver being used (like in this blog Apache is used )
+7. UPDATE wp_options and set the URL required
