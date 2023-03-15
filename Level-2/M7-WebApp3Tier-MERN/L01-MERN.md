@@ -1064,8 +1064,8 @@ frontend:
         - npm install
     build:
       commands:
+        - echo "BACKEND_URL=${DOMAIN_URL}" > .env
         - npm run build
-        - echo "BACKEND_URL=$DOMAIN_URL" >> backend/.env
   artifacts:
     # IMPORTANT - Please verify your build output directory
     baseDirectory: /
@@ -1101,4 +1101,4 @@ Use can check Cloudwatch metrics and log groups for monitoring
 7. domain management is done using AWS ROUTE 53 
 8. Network stack deployed can be used in production environments 
 9. CI/CD setup for both backend and frontend 
-10. 
+
