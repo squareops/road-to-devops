@@ -1093,12 +1093,12 @@ Use can check Cloudwatch metrics for monitoring and log groups
 **MERN STACK HAD BEEN DEPLOYED SUCCESSFULLY WITH THE FOLLOWING COMPONENTS:**
 
 1. Three node mongodb setup is up and running in private subnets
-2. backend deployed on EC2 instance with private
-3. frontend deployed on Amplify 
+2. Backend deployed on EC2 instance with private
+3. Frontend deployed on Amplify 
 4. DB connection string stored as ENVIRONMENT VARIABLE in AWS parameter store.
 5. In the loadbalancer security group, just allow ports 80 and 443 from everywhere (0.0.0.0)
 6. In the application security group, allow traffic from loadbalancer security group 
-7. domain management is done using AWS ROUTE 53 
+7. Domain management is done using AWS ROUTE 53 
 8. Network stack deployed can be used in production environments 
 9. CI/CD setup for both backend and frontend 
 
