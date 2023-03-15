@@ -55,10 +55,12 @@ Functions that SSH enables include the following:
 - secure management of network infrastructure components.
 - SSH can be used interactively to enable terminal sessions and should be used instead of the less secure Telnet program. SSH is also commonly used in scripts and other software to enable programs and systems to remotely and securely access data and other resources.
 
-### For more information:
+### For more information refer the following links 
 
 - [How to SSH to connect to remote host](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server) 
+  
 - [How to create a user on EC2 instance](https://aws.amazon.com/premiumsupport/knowledge-center/new-user-accounts-linux-instance/)
+  
 - [How to generate keys using ssh-keygen]( https://www.thegeekdiary.com/using-the-ssh-keygen-command-in-linux/)
 
 

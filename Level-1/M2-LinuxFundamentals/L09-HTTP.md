@@ -66,7 +66,11 @@ Many website hosting providers and other services will offer TLS/SSL certificate
 
 All websites using Cloudflare receive HTTPS for free using a shared certificate (the technical term for this is a multi-domain SSL certificate). Setting up a free account will guarantee a web property receives continually updated HTTPS protection. You can also explore our paid plans for individual certificates and other features. In either case, a web property receives all the benefits of using HTTPS.
 
-### For more information 
-https://www.youtube.com/watch?v=iYM2zFP3Zn0
-https://www.tutorialspoint.com/http/http_requests.htm
+### For more information refer the below links 
+
+[HTTP Crash Course & Exploration](https://www.youtube.com/watch?v=iYM2zFP3Zn0)
+
+[HTTP - Overview](https://www.tutorialspoint.com/http/http_overview.htm)
+
+[HTTPS Protocol Basics](https://www.tutorialspoint.com/security_testing/https_protocol_basics.htm)
 

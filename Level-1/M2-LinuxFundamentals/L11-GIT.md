@@ -117,12 +117,12 @@ Transmit local branch commits to the remote repository branch
 fetch and merge any commits from the tracking remote branch
 
 
-#### For More information
+#### For More information refer the following links 
 
-https://docs.google.com/document/d/1gYZaQxDa3o419xD1vJLaIyA7y99BfyfzEo5rAA_LSzg/edit 
+[Version Control Overview](https://docs.google.com/document/d/1gYZaQxDa3o419xD1vJLaIyA7y99BfyfzEo5rAA_LSzg/edit)
 
-https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet 
+[GIT cheatsheet ](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet)
 
-https://education.github.com/git-cheat-sheet-education.pdf 
+[GIT basic commands](https://education.github.com/git-cheat-sheet-education.pdf)
 
-https://docs.google.com/document/d/1DvUN4vy5CSA3gszM9VGDH0eqRSsuSpQ05I6L6tkUXiE 
+[GIT for beginners](https://docs.google.com/document/d/1DvUN4vy5CSA3gszM9VGDH0eqRSsuSpQ05I6L6tkUXiE)

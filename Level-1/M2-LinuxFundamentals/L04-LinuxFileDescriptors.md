@@ -26,8 +26,8 @@ When the shell runs a program, it opens three files with file descriptors 0, 1, 
 
         2	Represents standard error.
 
-### For more information
+### For more information refer the following links 
 
-https://bottomupcs.com/ch01s03.html
+[File Descriptor Overview](https://bottomupcs.com/ch01s03.html)
 
-https://www.linux.com/training-tutorials/ampersands-and-file-descriptors-bash/ 
+[Ampersands and File Descriptors in Bash](https://www.linux.com/training-tutorials/ampersands-and-file-descriptors-bash/)

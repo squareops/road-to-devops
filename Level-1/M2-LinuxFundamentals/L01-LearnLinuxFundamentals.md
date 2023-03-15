@@ -82,7 +82,8 @@ mv: Renames a directory
 
 apt-get: Command used to install and update packages
 ```
-### More Information:
-https://cheatography.com/davechild/cheat-sheets/linux-command-line/ 
+### More Information refer the below links
 
-https://www.interviewbit.com/linux-commands-cheat-sheet/ 
+[Popular Linux Commands](https://cheatography.com/davechild/cheat-sheets/linux-command-line/)
+
+[Linux Commands cheat sheet](https://www.interviewbit.com/linux-commands-cheat-sheet/)

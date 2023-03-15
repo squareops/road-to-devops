@@ -1,6 +1,35 @@
 # Invest in application and infrastructure monitoring.( Prometheus, Loki, Grafana, CloudWatch, Nagios, Datadog, New Relic, Sentry )
 
+In DevOps, observability is referred to the software tools and methodologies that help Dev and Ops teams to log, collect, correlate, and analyze massive amounts of performance data from a distributed application and glean real-time insights. This empowers teams to effectively monitor, revamp, and enhance the application to deliver a better customer experience.
+
+## Why DevOps observability is the future and why your organization needs it
+
+In the past, IT businesses have used Application Performance Monitoring (APM) to monitor and enhance application performance. It collects and analyzes telemetry data of the applications and systems and provides valuable insights for teams to address and prevent abnormal conditions. However, APM is the right fit only for monolithic applications or traditional distributed applications. It is because in those applications, the new code is released regularly and workflows and dependencies are well-known and easy to identify.
+
+But in the present world, the highly distributed nature of the applications has made APM obsolete. Organizations today are leveraging DevOps practices, including agile development, continuous integration & continuous deployment (CI/CD), to deliver applications faster than ever. And, APM can't stay abreast. The DevOps ecosystem required high-quality telemetry data to create accurate, context-rich, fully-correlated information of every application. Therefore, organizations need DevOps observability to gain high visibility of their complex application ecosystem, understand any change (planned or unplanned), and stay ahead of the curve.
+
 ![](Images/monitoring.png)
+
+## To do a good job with monitoring and observability, your should have the following:
+
+- Reporting on the overall health of systems (Are my systems functioning? Do my systems have sufficient resources available?).
+- Reporting on system state as experienced by customers (Do my customers know if my system is down and have a bad experience?).
+- Monitoring for key business and systems metrics.
+- Tooling to help you understand and debug your systems in production.
+- Tooling to find information about things you did not previously know (that is, you can identify unknown unknowns).
+- Access to tools and data that help trace, understand, and diagnose infrastructure problems in your production environment, including interactions between services.
+
+## How to implement monitoring and observability
+
+Monitoring and observability solutions are designed to do the following:
+
+- Provide leading indicators of an outage or service degradation.
+- Detect outages, service degradations, bugs, and unauthorized activity.
+- Help debug outages, service degradations, bugs, and unauthorized activity.
+- Identify long-term trends for capacity planning and business purposes.
+- Expose unexpected side effects of changes or added functionality.
+
+**Below we have mentioned few Logging and Monitoring tools, please go through the following:**
 
 #### What is Grafana and Prometheus?
 

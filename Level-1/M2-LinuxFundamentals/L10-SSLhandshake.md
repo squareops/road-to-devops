@@ -33,5 +33,5 @@ In overview, the steps involved in the SSL handshake are as follows:
 
 ![](Images/ssl-handshake.png)
 
-### For more infromation
-https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/
+### For more information refer the below link 
+[what happens in a TLS handshake](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/)

@@ -31,5 +31,9 @@ The OSI model provides a framework for understanding network communication, and 
 
  ![](Images/o2.png)
 
+ ## For more Information refer the following link
+
+ [OSI Model Overview](https://www.imperva.com/learn/application-security/osi-model/#:~:text=SecurityEssentialsProtocols-,What%20Is%20the%20OSI%20Model,companies%20in%20the%20early%201980s)
+
 
 

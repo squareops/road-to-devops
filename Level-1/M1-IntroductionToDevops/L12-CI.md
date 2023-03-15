@@ -21,6 +21,6 @@ Here are our top seven picks for the best continuous integration tools:
 - CircleCI
 - TravisCI
 
-### For more information check the below link
+### For more information refer the below link
 
 [Continous Integration steps and process](https://www.atlassian.com/continuous-delivery/continuous-integration/how-to-get-to-continuous-integration)

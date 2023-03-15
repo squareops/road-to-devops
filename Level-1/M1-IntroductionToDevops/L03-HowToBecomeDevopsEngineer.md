@@ -25,7 +25,7 @@ If you are a Developer, an Ops person, or a Quality Assurance guy, or even a fre
 
 ![](Images/devops4.png)
 
-#### For more information check the below link
+#### For more information refer the below link
 
 [DevOps RoadMap 2023](https://www.youtube.com/watch?v=9pZ2xmsSDdo&t=125s)
 

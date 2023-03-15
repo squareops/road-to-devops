@@ -63,8 +63,12 @@ echo [string]
 ```
 ### Practice Test
 
-Write a Shell Script to take backup of the database and upload it to a private S3 bucket. 
+1. Write a Shell Script to take backup of the database and upload it to a private S3 bucket. 
 
-Execute this script at 3 AM every Weekday using cron(which needs to be set up in /etc/cron.d directory and execution logs redirected to /var/log/db-backup.log ).
+2. Execute this script at 3 AM every Weekday using cron(which needs to be set up in /etc/cron.d directory and execution logs redirected to /var/log/db-backup.log ).
 
-Move the content from S3 standard to S3-IA after 3 hrs.
+3. Move the content from S3 standard to S3-IA after 3 hrs.
+
+### For more information refer the following 
+
+[Bash Script for beginners](https://www.freecodecamp.org/news/shell-scripting-crash-course-how-to-write-bash-scripts-in-linux/)

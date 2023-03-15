@@ -99,6 +99,7 @@ In man, you can navigate with the arrow keys. Press / to search for text within 
 
 - [How to install and Run Linux Software in Windows 10 using WSL2?](https://docs.google.com/document/d/1Npjvn1ZJ4sntjlHPZ6waFTZroFHnifR01BNQvPFk8Mc/edit#heading=h.b5xkd57q5dj)
 
-### For more information 
-https://www.tecmint.com/linux-package-managers/
+### For more information refer the following link
+
+[Linux Package Manager Overview](https://www.tecmint.com/linux-package-managers/)
 

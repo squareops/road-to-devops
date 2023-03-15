@@ -218,4 +218,6 @@ Network connection is broken or blocked. E.g. Nginx server is set up on port 80 
 401, 403, 404, 405
 500, 502, 503, 504
 
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+## For more information refer the following link 
+
+[HTTP STATUS CODES ](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)

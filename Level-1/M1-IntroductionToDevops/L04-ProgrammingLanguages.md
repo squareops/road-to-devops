@@ -24,7 +24,7 @@ With uses in container systems, API integration and microservices, Go -- sometim
 
 ![](Images/language.png)
 
-#### For more information check the below links
+#### For more information refer the below links
 
 [Best Programming & Scripting Languages for DevOps Engineers](https://devopscube.com/programming-languages-devops/)
 

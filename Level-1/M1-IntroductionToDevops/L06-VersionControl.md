@@ -19,7 +19,7 @@ It is a platform for hosting code that allows for version control and collaborat
 
 ![](Images/git-github.png)
 
-#### For more information check the below links
+#### For more information refer the below links
 
 [What is GIT ? ](https://www.simplilearn.com/tutorials/git-tutorial/what-is-git)
 

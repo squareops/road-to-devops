@@ -76,5 +76,6 @@ It's important to note that both Nginx and Apache are powerful, flexible web ser
 
 ![](Images/nginx1.png)
 
-### For more information:
-https://www.youtube.com/watch?v=9J1nJOivdyw 
+### For more information refer the following link 
+
+[Web Server Concepts and Examples](https://www.youtube.com/watch?v=9J1nJOivdyw) 

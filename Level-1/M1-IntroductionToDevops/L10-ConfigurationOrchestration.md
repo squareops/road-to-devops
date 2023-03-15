@@ -12,3 +12,11 @@ Configuration orchestration tools, which include Terraform and AWS CloudFormatio
 Configuration management tools like Chef, Puppet, and the others on this list help configure the software and systems on this infrastructure that has already been provisioned.
 
 Configuration orchestration tools do some level of configuration management, and configuration management tools do some level of orchestration. Companies can and many times use both types of tools together. 
+
+#### For more information refer the below links 
+
+[Orchestration in Devops](https://katalon.com/resources-center/blog/devops-orchestration-investment)
+
+[Orchestration Overview ](https://www.opsera.io/blog/devops-orchestration)
+
+[Orchestration Tools ](https://testsigma.com/blog/devops-orchestration-tools/)

@@ -223,6 +223,6 @@ These configuration files also inherit the default create behaviour, which instr
 
 There are many more configuration options available. You can read about all of them by typing man logrotate on the command line to bring up Logrotate’s manual page.
 
-### For more information 
+### For more information refer the following link
 
-https://www.digitalocean.com/community/tutorials/how-to-manage-logfiles-with-logrotate-on-ubuntu-20-04 
+[How to manage logfiles with logrotate](https://www.digitalocean.com/community/tutorials/how-to-manage-logfiles-with-logrotate-on-ubuntu-20-04) 

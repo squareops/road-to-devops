@@ -50,3 +50,9 @@ Through automation, a configuration management tool can provision a new server w
 7) SALTSTACK Configuration Tool.
 
 8) JUJU Configuration Tool.
+
+## For more information refer to the following links 
+
+[configuration management overview](https://www.softwaretestinghelp.com/configuration-management-in-devops/)
+
+[Configuration Management Devops Practices](https://www.browserstack.com/guide/configuration-management-in-devops)

@@ -72,6 +72,6 @@ To create a user/group use the following commands:
  
     /etc/sudoers (configuration for sudo)
 
-### For more information:
+### For more information refer the following link 
 
-https://www.tutorialspoint.com/linux_admin/linux_admin_user_management.htm 
+[Linux Admin - User Management](https://www.tutorialspoint.com/linux_admin/linux_admin_user_management.htm)

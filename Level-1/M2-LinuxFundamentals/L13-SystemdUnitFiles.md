@@ -176,9 +176,9 @@ org.cups.cupsd.path                        enabled
 
 The state will usually be enabled, disabled, static, or masked. In this context, static means that the unit file does not contain an install section, which is used to enable a unit. As such, these units cannot be enabled. Usually, this means that the unit performs a one-off action or is used only as a dependency of another unit and should not be run by itself.
 
-### For more information:
+### For more information refer the following link 
 
-https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
+[How to use systemctl to manage systemd services and units](https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units)
 
 
 

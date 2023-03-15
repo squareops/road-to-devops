@@ -93,8 +93,9 @@ ZZ Save workspace and quit the editor (same as :wq)
 
 :f to find out the line numbers you want.
 ```
-### For more information
-https://www.youtube.com/watch?v=-txKSRn0qeA&t=364s
+### For more information refer the following links
 
-https://www.howtoforge.com/vim-basics 
+[VIM in 100 seconds](https://www.youtube.com/watch?v=-txKSRn0qeA&t=364s)
+
+[VIM Basics](https://www.howtoforge.com/vim-basics)
 

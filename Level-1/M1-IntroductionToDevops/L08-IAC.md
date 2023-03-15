@@ -53,7 +53,8 @@ CloudFormation templates are JSON or YAML-formatted text files comprised of five
 - SaltStack
 - Vagrant
 
-#### For more information check the below links
+#### For more information refer the below links
+
 [What is IAC ?](https://www.redhat.com/en/topics/automation/what-is-infrastructure-as-code-iac#:~:text=Infrastructure%20as%20Code%20(IaC)%20is,to%20edit%20and%20distribute%20configurations.)
 
 [Best Pratices for IAC](https://stackify.com/what-is-infrastructure-as-code-how-it-works-best-practices-tutorials/)
