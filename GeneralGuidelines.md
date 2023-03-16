@@ -20,14 +20,13 @@
 
         - [stop EC2 instances](https://github.com/sq-ia/aws-stop-start-services/blob/develop/ec2-instances-stop-start/stop-EC2.md) 
 
-        - [stop RDS](https://github.com/sq-ia/aws-stop-start-services/blob/develop/rds-stop-start/stop-RDS.md
-        - )
+        - [stop RDS](https://github.com/sq-ia/aws-stop-start-services/blob/develop/rds-stop-start/stop-RDS.md)
 
     - ##### Do not push AWS account Access keys / Secret keys to any git repository.
 
-3. All tutorials and video links will be followed by quick hands-on with the concepts mentioned in tutorial
+1. All tutorials and video links will be followed by quick hands-on with the concepts mentioned in tutorial
 
-4. Tagging instructions for resources in AWS account ( TO BE FOLLOWED STRICTLY ). Aws-tagging-best-practices: https://www.cloudforecast.io/blog/aws-tagging-best-practices/ 
+2. Tagging instructions for resources in AWS account ( TO BE FOLLOWED STRICTLY ). Aws-tagging-best-practices: https://www.cloudforecast.io/blog/aws-tagging-best-practices/ 
 
     - Do not use names in the resource name. Instead add a tag with the Owner Key (Owner:<your-name>).
 

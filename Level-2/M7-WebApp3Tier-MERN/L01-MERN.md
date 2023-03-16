@@ -1089,7 +1089,7 @@ Use can check Cloudwatch metrics for monitoring and log groups for these AWS res
 
 ![](Images/d1.png)
 
-**MERN STACK HAD BEEN DEPLOYED SUCCESSFULLY WITH THE FOLLOWING COMPONENTS:**
+**MERN STACK HAD BEEN DEPLOYED SUCCESSFULLY WITH THE FOLLOWING COMPONENTS and here are few points to remember :**
 
 1. Three node mongodb setup is up and running in private subnets
 2. Backend deployed on EC2 instance with private
@@ -1101,3 +1101,7 @@ Use can check Cloudwatch metrics for monitoring and log groups for these AWS res
 8. Network stack deployed can be used in production environments 
 9. CI/CD setup for both backend and frontend 
 
+1. public 3 repos 
+2. documents 
+3. public repo terraform mern stack 
+4. hands on will be covered in level 3 under obervability section  
