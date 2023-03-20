@@ -1,6 +1,6 @@
 ## Docker Container Hands-on 
 In this Article we will be Building container images for each service of the Microservice application.
-The code for all of these applications can be found in this [repository](https://github.com/rinormaloku/k8s-mastery). I recommend cloning it immediately because we are going to build amazing things together.
+The code for all of these applications can be found in this [repository](https://github.com/sq-ldc/sentiment-analyzer-example-app). I recommend cloning it immediately because we are going to build amazing things together.
 
 **note: This tutorial assume the reader knows about application development, Microservices, and Docker containers.**
 
