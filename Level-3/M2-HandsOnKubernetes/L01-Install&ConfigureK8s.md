@@ -2,12 +2,12 @@
 K3s is a certified lightweight kubernetes. The tool can be used to create a single node kubernetes cluster.
 
 - [Install and Configure K3s](#install-and-configure-k3s)
-  - [Installation:](#installation)
-  - [Get nodes in cluster:](#get-nodes-in-cluster)
-  - [Install kubectl:](#install-kubectl)
-  - [Verify installation:](#verify-installation)
-  - [Configure kubectl to access cluster:](#configure-kubectl-to-access-cluster)
-  - [Ensure kubectl works:](#ensure-kubectl-works)
+  - [Installation](#installation)
+  - [Get nodes in cluster](#get-nodes-in-cluster)
+  - [Install kubectl](#install-kubectl)
+  - [Verify installation](#verify-installation)
+  - [Configure kubectl to access cluster](#configure-kubectl-to-access-cluster)
+  - [Ensure kubectl works](#ensure-kubectl-works)
   - [Install Helm3 (Ref: https://helm.sh/docs/intro/install/)](#install-helm3-ref-httpshelmshdocsintroinstall)
   - [Install mysql Helm3](#install-mysql-helm3)
 
@@ -15,19 +15,19 @@ K3s is a certified lightweight kubernetes. The tool can be used to create a sing
 
 Spun up an Ubuntu 20 EC2 instance and run the following commands on it 
 
-### Installation: 
+### Installation
 
     curl -sfL https://get.k3s.io | sh -
 
   ![](Images/k8.png)
 
-### Get nodes in cluster:
+### Get nodes in cluster
 
     sudo k3s kubectl get node
 
   ![](Images/k9.png)
 
-### Install kubectl:
+### Install kubectl
 
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
@@ -35,13 +35,13 @@ Spun up an Ubuntu 20 EC2 instance and run the following commands on it
 
   ![](Images/k11.png)
 
-### Verify installation: 
+### Verify installation
 
     kubectl version --client
 
   ![](Images/k12.png)
 
-### Configure kubectl to access cluster:
+### Configure kubectl to access cluster
 
 - Copy k3s kubeconfig from its default location to .kube/config
 
@@ -55,7 +55,7 @@ sudo chown $USER:$USER ~/.kube/config
 ```
   ![](Images/k13.png)
 
-### Ensure kubectl works:
+### Ensure kubectl works
 
     kubectl cluster-info
 

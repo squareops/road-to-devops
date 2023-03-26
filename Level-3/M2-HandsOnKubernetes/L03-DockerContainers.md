@@ -28,7 +28,7 @@ To pull these images on master node, run the following commands
 
     docker pull IMAGE_URI 
 
-Like, in our case the image uri is as follows:
+Like, in our case the image URI is as follows:
 
 ```
 docker pull public.ecr.aws/u8i3s3j7/road-to-devops-sentiment-analysis:sa-logic

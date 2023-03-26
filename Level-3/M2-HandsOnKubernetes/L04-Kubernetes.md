@@ -1,8 +1,10 @@
 # Deploy Sentiment Analyzer using Kubernetes
 
-
+Here we will deploy the same sentiment analyzer application but over Kubernetes by creating various deployments which up spun up respective pods and also create services accordingly to expose the application for accessing 
 
 ## Step 1: Prepare K3S cluster 
+
+Follow this [tutorial to setup K3s cluster](https://github.com/squareops/road-to-devops/blob/develop/Level-3/M2-HandsOnKubernetes/L02-SetupK3sCluster.md) with master and worker nodes respectively
 
 ## Step 2 : Install dependencies on EC2 
 
@@ -144,7 +146,6 @@ kubectl apply -f service-sa-frontend-lb.yaml
 
 ```
 
-
 Now check all services and pods are up 
 
 ![](Images/a36.png)
@@ -153,15 +154,160 @@ Hit the Domain and the application will work
 
 ![](Images/a37.png)
 
-## sentiment analyser using kubernetes and ingress ##
-Enable ingress by below command
+**Now we will deploy the same application using Ingress**
+
+## sentiment analyser using kubernetes and ingress
+
+### Step 1: Enable ingress by below command
 
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
 
-Check whether the load balancer created or not in your account
+### Step 2: Check whether the load balancer created or not in your account
 
     kubectl get all -n ingress-nginx
 
 ![](Images/a38.png)
 
-git clone 
+check loadbalancer created in the AWS account 
+
+![](Images/a39.png)
+
+### Step 3: Clone the Repository & deploy application
+
+    git clone https://github.com/sq-ldc/sentiment-analyzer-example-app.git
+
+Go to this folder deployment-through-ingress 
+
+![](Images/a40.png)
+
+Make sure you have built and updated the deployment files with your docker images respectively
+1. update image in sa-logic-deployment.yaml
+
+![](Images/a41.png)
+
+2. update image in sa-web-app-deployment.yaml
+
+![](Images/a43.png)
+
+3. update the host name in the ingress-web.yaml file
+
+![](Images/a44.png)
+
+4. 
+Firstly deploy logic deployment and logic service by running the following commands 
+
+```
+kubectl apply -f sa-logic-deployment.yaml
+kubecl apply -f  service-sa-logic.yaml
+
+```
+Now the check the pods and svc created 
+
+![](Images/a42.png)
+
+
+Then deploy webapp, webapp service and web-app ingress using the following commands 
+
+```
+kubectl apply -f sa-web-app-deployment.yaml
+kubectl apply -f service-sa-web-app.yaml
+kubectl apply -f ingress-web.yaml
+```
+
+![](Images/a45.png)
+
+![](Images/a46.png)
+
+If You will get the error that webapp ingress is not deployed , then run.
+
+    kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+
+Pass your web-app host name in the App.js of frontend
+
+![](Images/a47.png)
+
+```
+cd ..
+sudo npm install
+sudo npm run build
+```
+![](Images/a48.png)
+
+Create image of frontend and push it to docker hub.
+
+![](Images/a49.png)
+
+Then deploy frontend, frontend service and frontend ingress
+
+- update the docker image in sa-frontend-deployment.yaml
+
+![](Images/a50.png)
+
+- update host in ingress-front.yaml 
+
+![](Images/a51.png)
+
+```
+kubectl apply -f sa-frontend-deployment.yaml
+kubectl apply -f service-sa-frontend.yaml
+kubectl apply -f ingress-front.yaml
+```
+Check whether all get host name and address of load balancer using below command
+```
+kubectl get ingress
+```
+![](Images/a52.png)
+
+### Step 4: Create your all host names in route 53 and attach it to load balancer 
+
+- hostname for webapp 
+
+![](Images/a53.png)
+
+- hostname for frontend 
+
+![](Images/a54.png)
+
+### Step 5: Verify the application 
+
+Hit your front domain and check app will work.
+
+![](Images/a55.png)
+
+## sentiment analyser using kubernetes and helm chart
+
+### Install HELM dependencies
+
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+![](Images/a56.png)
+
+Run below commands
+
+```
+helm create sa-webapp
+helm create sa-frontend
+helm create sa-logic
+```
+
+Enter every directory and change the required values in values.yaml file like ingress value(only in front and webapp) image, image tag, etc.
+
+Don’t forget to pass the env variable in webapp deployment which is required to connect webapp service to logic service or you can take the help from https://github.com/sq-ldc/sentiment-analyzer-example-app/tree/main/HELM
+Also don’t forget to disable probes in webapp and logic helm deployment file
+Run these commands
+```
+helm install sa-logic sa-logic/ --values sa-logic/values.yaml
+helm install sa-webapp sa-webapp/ --values sa-webapp/values.yaml
+helm install sa-frontend sa-frontend/ --values sa-frontend/values.yaml
+```
+Hit the frontend domain you’ll get the application output
+
+![](Images/a55.png)
+
+## Conclusion 
+
+You have deployed application on Kubernetes using ingress and helm for which you had deployed pods, services as loadbalancer and ingress. Next you had updated the docker images in respective values.yaml for helm chart deployment 
