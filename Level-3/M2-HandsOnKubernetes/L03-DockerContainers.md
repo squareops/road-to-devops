@@ -1,6 +1,12 @@
 # Docker Containers 
 
-We assume that in Level 1, section 7 you must have gone through the deployment of Sentiment Analysis application on Docker container. If not, check the following [link](https://github.com/squareops/road-to-devops/blob/develop/Level-1/M7-Docker/L09-DockerHandsOn.md) and store docker images to the ECR or DockerHub Repository
+We assume that in [Level 1, section 7](https://github.com/squareops/road-to-devops/blob/develop/Level-1/M7-Docker/L09-DockerHandsOn.md) you must have gone through the deployment of Sentiment Analysis application on Docker container. If not, check the above link and store docker images to the ECR or DockerHub Repository
+
+- [Docker Containers](#docker-containers)
+  - [Overview:](#overview)
+  - [Pre-Requisites](#pre-requisites)
+  - [Step 1: Pull the Docker Images](#step-1-pull-the-docker-images)
+  - [Step 2: Run the Docker Containers](#step-2-run-the-docker-containers)
 
 ## Overview:
 In this tutorial we will deploy application using docker images on the docker containers respectively. Then we will deploy sentiment analysis application on Kubernetes Cluster
@@ -70,4 +76,6 @@ Our Sentiment Analysis web app became a world hit and we suddenly have a million
 
 **Now here comes Kubernetes to rescue**
 
-Kubernetes solves all these questions (and more!). My attempt to reduce Kubernetes in one sentence would be: “Kubernetes is a Container Orchestrator, that abstracts the underlying infrastructure. (Where the containers run)”.
+Kubernetes solves all these questions (and more!). My attempt to explain Kubernetes in one sentence would be: “Kubernetes is a Container Orchestrator, that abstracts the underlying infrastructure. (Where the containers run)”.
+
+Let's start with deploying application using Kurbernetes in the next lecture 

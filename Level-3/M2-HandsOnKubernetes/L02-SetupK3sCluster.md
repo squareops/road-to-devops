@@ -334,4 +334,4 @@ Check the nodes are successfully running on the master node. Run the following c
 
 ![](Images/a28.png)
 
-K3s cluster is ready and now you can run practice on it to deploy application in the next lecture 
+K3s cluster is ready and now you can practice on it to deploy application in the next lecture 

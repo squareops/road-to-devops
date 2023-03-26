@@ -1,9 +1,19 @@
-## Install and Configure K3s 
-
-Spun up an Ubuntu 20 EC2 instance and run the following commands on it :
-
 ### Overview: 
 K3s is a certified lightweight kubernetes. The tool can be used to create a single node kubernetes cluster.
+
+- [Install and Configure K3s](#install-and-configure-k3s)
+  - [Installation:](#installation)
+  - [Get nodes in cluster:](#get-nodes-in-cluster)
+  - [Install kubectl:](#install-kubectl)
+  - [Verify installation:](#verify-installation)
+  - [Configure kubectl to access cluster:](#configure-kubectl-to-access-cluster)
+  - [Ensure kubectl works:](#ensure-kubectl-works)
+  - [Install Helm3 (Ref: https://helm.sh/docs/intro/install/)](#install-helm3-ref-httpshelmshdocsintroinstall)
+  - [Install mysql Helm3](#install-mysql-helm3)
+
+## Install and Configure K3s 
+
+Spun up an Ubuntu 20 EC2 instance and run the following commands on it 
 
 ### Installation: 
 

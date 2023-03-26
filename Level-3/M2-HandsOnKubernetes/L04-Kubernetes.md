@@ -1,4 +1,5 @@
-# sentiment analyser using kubernetes
+# Deploy Sentiment Analyzer using Kubernetes
+
 
 
 ## Step 1: Prepare K3S cluster 
