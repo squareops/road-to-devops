@@ -4,6 +4,15 @@ Kubernetes is an architecture that offers a loosely coupled mechanism for servic
 
 ![](Images/k2.png)
 
+- [What is Kubernetes Architecture ?](#what-is-kubernetes-architecture-)
+- [What are Kubernetes architecture components?](#what-are-kubernetes-architecture-components)
+- [What is Kubernetes Control Plane architecture?](#what-is-kubernetes-control-plane-architecture)
+  - [Controller functions included in this process include:](#controller-functions-included-in-this-process-include)
+  - [Elements of the cloud controller manager include:](#elements-of-the-cloud-controller-manager-include)
+- [What is Kubernetes node architecture?](#what-is-kubernetes-node-architecture)
+- [What are other Kubernetes infrastructure components?](#what-are-other-kubernetes-infrastructure-components)
+- [What are Kubernetes architecture best practices and design principles?](#what-are-kubernetes-architecture-best-practices-and-design-principles)
+
 # What are Kubernetes architecture components?
 The main components of a Kubernetes cluster include:
 

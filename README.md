@@ -53,13 +53,13 @@ This section has various modules which will help you to learn DevOps Job from sc
 
 #### Note: For a beginner, it will take up to 4-6 weeks to complete Level 2 but for an intermediate person Level 2 can be completed within 3-4 weeks  
 
-### LEVEL 3: Comprises of the Kubernetes concepts which we will launch SOON 
+### LEVEL 3: Comprises of Introduction Kubernetes with its components and completed hand-on with application deployment over K8s cluster
 
-- Introduction to Kubernetes with Hands-on
-- Installation & Configure K8s
-- Deploying using HELM Chart 
-- Observability on Kubernetes 
-- SAAS & Large scale deployments 
+| Module |   Description  |
+|---------|----------------|
+|  M01    | [Introduction to Kubernetes](Level-3/M1-IntroductionToKubernetes)  |
+|  M02    | [Hands on Kubernetes](Level-3/M2-HandsOnKubernetes)  |
+|  M03    | [Observability on Kubernetes](Level-3/M3-ObservabilityOnKubernetes)  |
   
 ## Contribution & Issue Reporting
 

@@ -1,6 +1,21 @@
 # Kubernetes
 Kubernetes is a popular open source platform for container orchestration — that is, for the management of applications built out of multiple, largely self-contained runtimes called containers. Containers have become increasingly popular since the Docker containerization project launched in 2013, but large, distributed containerized applications can become increasingly difficult to coordinate. By making containerized applications dramatically easier to manage at scale, Kubernetes has become a key part of the container revolution.
 
+- [Kubernetes](#kubernetes)
+  - [What is container orchestration?](#what-is-container-orchestration)
+  - [What is Kubernetes?](#what-is-kubernetes)
+  - [Google and Kubernetes](#google-and-kubernetes)
+  - [Kubernetes vs. other projects](#kubernetes-vs-other-projects)
+  - [Kubernetes vs. Docker and Docker swarm mode](#kubernetes-vs-docker-and-docker-swarm-mode)
+  - [Kubernetes vs. Mesos](#kubernetes-vs-mesos)
+  - [Kubernetes architecture: How Kubernetes works](#kubernetes-architecture-how-kubernetes-works)
+    - [Kubernetes clusters](#kubernetes-clusters)
+    - [Kubernetes nodes and pods](#kubernetes-nodes-and-pods)
+    - [Kubernetes services](#kubernetes-services)
+    - [Kubernetes policies](#kubernetes-policies)
+    - [Kubernetes Ingress](#kubernetes-ingress)
+    - [Kubernetes Dashboard](#kubernetes-dashboard)
+
 ## What is container orchestration?
 Containers support VM-like separation of concerns but with far less overhead and far greater flexibility. As a result, containers have reshaped the way people think about developing, deploying, and maintaining software. In a containerized architecture, the different services that constitute an application are packaged into separate containers and deployed across a cluster of physical or virtual machines. But this gives rise to the need for container orchestration—a tool that automates the deployment, management, scaling, networking, and availability of container-based applications.
 

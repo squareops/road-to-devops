@@ -6,6 +6,16 @@ Kubernetes is a powerful container-orchestration system for application deployme
 
 This article explains what Helm and Helm charts are and how to automate application deployment to Kubernetes.
 
+- [Introduction](#introduction)
+- [What is Helm?](#what-is-helm)
+- [Why Do We Need Helm?](#why-do-we-need-helm)
+- [What Can You Do With Helm?](#what-can-you-do-with-helm)
+- [How Does Helm Work?](#how-does-helm-work)
+- [What Is a Helm Chart?](#what-is-a-helm-chart)
+- [How Do Helm Charts Work?](#how-do-helm-charts-work)
+- [Helm Chart Structure](#helm-chart-structure)
+- [Helm Chart Repositories](#helm-chart-repositories)
+
 ## What is Helm?
 If Kubernetes were an operating system, Helm would be the package manager. Ubuntu uses apt, CentOS uses yum, and Kubernetes uses helm.
 

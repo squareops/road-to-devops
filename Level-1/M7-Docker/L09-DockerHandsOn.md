@@ -638,3 +638,5 @@ Verify in ECR that images are pushed successfully
 ![](Images/d31.png)
 
 **note: If you face issues while pushing so check the required permissions to your AWS user**
+
+In this section, we learned about the Dockerfile, how to use it to build an image, and the commands to push it to the Docker registry. 
