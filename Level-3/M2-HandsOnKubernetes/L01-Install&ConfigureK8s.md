@@ -1,5 +1,5 @@
-### Overview: 
-K3s is a certified lightweight kubernetes. The tool can be used to create a single node kubernetes cluster.
+### K3s Overview: 
+K3s is a certified lightweight Kubernetes. The tool can be used to create a single node Kubernetes cluster. Below are the steps to install and configure K3s on AWS EC2 instance 
 
 - [Install and Configure K3s](#install-and-configure-k3s)
   - [Installation](#installation)
@@ -13,7 +13,7 @@ K3s is a certified lightweight kubernetes. The tool can be used to create a sing
 
 ## Install and Configure K3s 
 
-Spun up an Ubuntu 20 EC2 instance and run the following commands on it 
+Spun up an Ubuntu-20 EC2 instance and run the following commands on it 
 
 ### Installation
 
@@ -43,7 +43,7 @@ Spun up an Ubuntu 20 EC2 instance and run the following commands on it
 
 ### Configure kubectl to access cluster
 
-- Copy k3s kubeconfig from its default location to .kube/config
+Copy k3s kubeconfig from its default location to .kube/config
 
 ```
 

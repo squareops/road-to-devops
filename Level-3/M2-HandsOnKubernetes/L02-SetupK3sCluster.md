@@ -11,7 +11,7 @@ Here we will setup a kubernetes cluster with one master and one worker node usin
 
 ## Step 1: Deploy Network 
 
-We will deploy ISOLATED networking components using Terraform. These are the following AWS resources which will be created:
+We will start with deploying ISOLATED networking components using Terraform. These are the following AWS resources which will be created:
 - VPC
 - Public Subnets 
 - Private Subnets 

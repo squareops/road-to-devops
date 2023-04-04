@@ -2,7 +2,14 @@
 
 Hosting Jenkins on a Kubernetes cluster is beneficial for Kubernetes-based deployments and dynamic container-based scalable Jenkins agents.
 
-In this guide, I have explained the step-by-step process for setting up Jenkins on a [Kubernetes cluster]().
+In this guide, I have explained the step-by-step process for setting up Jenkins on a [Kubernetes cluster](https://github.com/squareops/road-to-devops/blob/develop/Level-3/M2-HandsOnKubernetes/L02-SetupK3sCluster.md).
+
+- [Setup Jenkins On Kubernetes Cluster](#setup-jenkins-on-kubernetes-cluster)
+  - [Step 1: Create a Namespace for Jenkins. It is good to categorize all the devops tools as a separate namespace from other applications.](#step-1-create-a-namespace-for-jenkins-it-is-good-to-categorize-all-the-devops-tools-as-a-separate-namespace-from-other-applications)
+  - [Step 2: Create a serviceAccount.yaml file and copy the following admin service account manifest.](#step-2-create-a-serviceaccountyaml-file-and-copy-the-following-admin-service-account-manifest)
+  - [Step 3: Create volume.yaml and copy the following persistent volume manifest.](#step-3-create-volumeyaml-and-copy-the-following-persistent-volume-manifest)
+  - [Step 4: Create a Deployment file named deployment.yaml and copy the following deployment manifest.](#step-4-create-a-deployment-file-named-deploymentyaml-and-copy-the-following-deployment-manifest)
+  - [Step 5: Create service.yaml and copy the following service manifest.](#step-5-create-serviceyaml-and-copy-the-following-service-manifest)
 
 For setting up a Jenkins cluster on Kubernetes, we will do the following.
 
@@ -122,7 +129,7 @@ spec:
       storage: 3Gi
 ```
 
-Important Note: Replace instance-id with any one of your cluster worker nodes hostname.
+**Important Note: Replace instance-id with any one of your cluster worker nodes hostname.**
 
 You can get the worker node hostname using the kubectl.
 
@@ -258,7 +265,9 @@ Create the Jenkins service using kubectl.
 
 Now if you browse to any one of the Node IPs on port 32000, you will be able to access the Jenkins dashboard.
 
-http://<node-ip>:32000
+**http://<node-ip>:32000**
+
+**note: make sure you have allowed port 32000**
 
 Jenkins will ask for the initial Admin password when you access the dashboard for the first time.
 
@@ -314,8 +323,125 @@ Click on manage jenkins -> manage nodes and clouds -> configure clouds -> select
 
 ![](Images/b18.png)
 
+![](Images/b23.png)
+
 Describe jenkins-jnlp service to get jenkins tunnel as Endpoints.
 
 ![](Images/b19.png)
 
 ![](Images/b20.png)
+
+Now click on create **Pipeline**
+
+![](Images/b21.png)
+
+Copy the following script in script section
+
+```
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: maven
+            image: maven:alpine
+            command:
+            - cat
+            tty: true
+          - name: docker
+            image: docker:latest
+            command:
+            - cat
+            tty: true
+            volumeMounts:
+             - mountPath: /var/run/docker.sock
+               name: docker-sock
+          volumes:
+          - name: docker-sock
+            hostPath:
+              path: /var/run/docker.sock    
+        '''
+    }
+  }
+  stages {
+    stage('Clone Repository') {
+      steps {
+        container('maven') {
+             git branch: 'master', changelog: false, poll: false, url: 'https://github.com/sq-ldc/sentiment-analyzer-example-app.git'
+        }
+      }
+    }  
+    stage('Login Into Docker') {
+      steps {
+        container('docker') {
+          sh 'docker login --username xxxxxx --password xxxxxxx'
+      }
+    }
+    }
+    stage('Build Docker Images') {
+      steps {
+        container('docker') {
+          dir("sa-frontend") {
+            sh 'docker build -t reponame/sentiment-analysis-frontend:latest .'
+          }
+          dir("sa-webapp") {
+            sh 'docker build -t reponame/sentiment-analysis-web-app:latest .'
+          }
+          dir("sa-logic") {
+            sh 'docker build -t reponame/sentiment-analysis-logic:latest .'
+          }
+        }
+      }
+    }
+     stage('Push Images Docker to DockerHub') {
+      steps {
+        container('docker') {
+          sh 'docker push reponame/sentiment-analysis-frontend:latest'
+          sh 'docker push reponame/sentiment-analysis-web-app:latest'
+          sh 'docker push reponame/sentiment-analysis-logic:latest'
+      }
+     }
+     }
+  }
+    post {
+      always {
+        container('docker') {
+          sh 'docker logout'
+      }
+      }
+    }
+}
+```
+
+![](Images/b22.png)
+
+Install docker on both worker and master nodes using the following [link](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04)
+
+If you face error while checking the status of docker, then run the following command 
+
+  rm -fr /var/run/docker.sock
+
+Then start the docker and check the status 
+
+```
+sudo systemctl start docker 
+sudo systemctl status docker 
+```
+
+**note: make sure you have allowed port 8080 from everywhere**
+
+Update the DockerHub credentials as follows
+
+![](Images/b24.png)
+
+Now run the pipeline 
+
+![](Images/b25.png)
+
+![](Images/b26.png)
+
+![](Images/b27.png)
+

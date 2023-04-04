@@ -10,13 +10,13 @@ Here we will deploy the same sentiment analyzer application but over Kubernetes 
   - [Step 3: Clone Github Repository](#step-3-clone-github-repository)
   - [Step 4: Pull docker Images](#step-4-pull-docker-images)
   - [Step 5: Setup the Application](#step-5-setup-the-application)
-- [sentiment analyser using Kubernetes and ingress](#sentiment-analyser-using-kubernetes-and-ingress)
+- [Deploy Sentiment Analyzer using Kubernetes using Kubernetes and ingress](#deploy-sentiment-analyzer-using-kubernetes-using-kubernetes-and-ingress)
   - [Step 1: Enable ingress by below command](#step-1-enable-ingress-by-below-command)
   - [Step 2: Check whether the load balancer created or not in your account](#step-2-check-whether-the-load-balancer-created-or-not-in-your-account)
   - [Step 3: Clone the Repository \& deploy application](#step-3-clone-the-repository--deploy-application)
   - [Step 4: Create your all host names in route 53 and attach it to load balancer](#step-4-create-your-all-host-names-in-route-53-and-attach-it-to-load-balancer)
   - [Step 5: Verify the application](#step-5-verify-the-application)
-- [sentiment analyser using Kubernetes and helm chart](#sentiment-analyser-using-kubernetes-and-helm-chart)
+- [Deploy Sentiment Analyzer using Kubernetesand helm chart](#deploy-sentiment-analyzer-using-kubernetesand-helm-chart)
   - [Install HELM dependencies](#install-helm-dependencies)
 - [Conclusion](#conclusion)
 
@@ -174,7 +174,7 @@ Hit the Domain and the application will work
 
 **Now we will deploy the same application using Ingress**
 
-# sentiment analyser using Kubernetes and ingress
+# Deploy Sentiment Analyzer using Kubernetes using Kubernetes and ingress
 
 ## Step 1: Enable ingress by below command
 
@@ -292,7 +292,7 @@ Hit your front domain and check app will work.
 
 ![](Images/a55.png)
 
-# sentiment analyser using Kubernetes and helm chart
+# Deploy Sentiment Analyzer using Kubernetesand helm chart
 
 ## Install HELM dependencies
 
