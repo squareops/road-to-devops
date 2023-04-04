@@ -188,4 +188,7 @@ click on **new app** and enter the following information
 
 similarly create application for sa-webapp and sa-frontend 
 
-![](Images/b41.png)
+![](Images/b42.png)
+
+## Step 6: Verify the application 
+
