@@ -445,3 +445,6 @@ Now run the pipeline
 
 ![](Images/b27.png)
 
+Now that your Jenkins Pipeline is running successfully and images are pushed into DockerHub , you can say that you have completed with CI(Continuous Integration)
+
+Let's start with Continuous Deployment in the next lecture

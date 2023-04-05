@@ -46,7 +46,6 @@ Spun up an Ubuntu-20 EC2 instance and run the following commands on it
 Copy k3s kubeconfig from its default location to .kube/config
 
 ```
-
 mkdir ~/.kube
 
 sudo cp  /etc/rancher/k3s/k3s.yaml ~/.kube/config

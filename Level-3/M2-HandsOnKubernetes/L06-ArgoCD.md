@@ -1,5 +1,14 @@
 # Setup ArgoCD on Kubernetes Cluster
 
+Now we will setup ArgoCD on the same Kubernetes cluster on which Jenkins is deployed 
+
+- [Setup ArgoCD on Kubernetes Cluster](#setup-argocd-on-kubernetes-cluster)
+  - [Step 1: Install ArgoCD](#step-1-install-argocd)
+  - [Step 2: Edit ArgoCD service to run as NodePort](#step-2-edit-argocd-service-to-run-as-nodeport)
+  - [Step 3: Configure ArgoCD](#step-3-configure-argocd)
+  - [Step 4: Add deployment stage in Jenkins script](#step-4-add-deployment-stage-in-jenkins-script)
+  - [Step 5: Create application in ArgoCD](#step-5-create-application-in-argocd)
+  - [Step 6: Verify the application](#step-6-verify-the-application)
 
 ## Step 1: Install ArgoCD
 
@@ -186,9 +195,12 @@ click on **new app** and enter the following information
 
 ![](Images/b41.png)
 
-similarly create application for sa-webapp and sa-frontend 
+Similarly create application for sa-webapp and sa-frontend 
 
 ![](Images/b42.png)
 
 ## Step 6: Verify the application 
 
+![](Images/a55.png)
+
+Now that you have completely 
