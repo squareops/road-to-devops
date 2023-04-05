@@ -1,6 +1,6 @@
 # Module 2: Hands-on Kubernetes
 
-This module gives Hands-on sessions upon setting up the K8s cluster and deploying sentiment analyzer application on docker containers and then on Kubernetes using ingress. Lastly 
+This module gives Hands-on sessions upon setting up the K8s cluster and deploying sentiment analyzer application on docker containers and then on Kubernetes using ingress. Lastly, we will deploy the application using CI/CD with Jenkins and ArgoCD respectively  
 
 | Lecture |   Description  |
 |---------|----------------|

@@ -1,6 +1,6 @@
 # Module 3: Observability on Kubernetes
 
-This module gives Introduction to Kubernetes components 
+This module gives overview on monitoring on Kubernetes 
 
 | Lecture |   Description  |
 |---------|----------------|
