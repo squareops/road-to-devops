@@ -8,7 +8,7 @@ This module gives Introduction to Kubernetes components
 |  L02    | [Kubernetes Architecture](L02-KubernetesArchitecture.md)  |
 |  L03    | [What is HELM ?](L03-Helm.md)  |
 |  L04    | [Kubernetes Certifications](L04-Certification.md)  |
-|  L05    | [Kubernetes Sessions](L05-KubernetesSesssions.md)  |
+|  L05    | [Kubernetes Sessions](L05-KubernetesSessions.md)  |
 
 #### Module Completion Estimate: 10 days for beginners and 6 days for an intermediate  
 

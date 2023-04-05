@@ -24,7 +24,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 Edit the service by running the following command 
 
-  kubectl -n argocd edit svc argocd-server
+    kubectl -n argocd edit svc argocd-server
 
 ![](Images/b30.png)
 
@@ -40,7 +40,7 @@ Check the port on which service is running and then check on browser with nodeip
 
 After this check the password for login in Argocd by running the following command 
 
-  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
 ![](Images/b29.png)
 
@@ -203,4 +203,4 @@ Similarly create application for sa-webapp and sa-frontend
 
 ![](Images/a55.png)
 
-Now that you have completely 
+Now that you have completely deployed application using CI/CD on Jenkins and ArgoCD respectively 

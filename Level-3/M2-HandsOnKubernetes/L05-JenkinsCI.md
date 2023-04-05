@@ -265,7 +265,7 @@ Create the Jenkins service using kubectl.
 
 Now if you browse to any one of the Node IPs on port 32000, you will be able to access the Jenkins dashboard.
 
-**http://<node-ip>:32000**
+**http://node-ip:32000**
 
 **note: make sure you have allowed port 32000**
 
@@ -305,13 +305,9 @@ Our Jenkins setup is ready now.
 
 ![](Images/b13.png)
 
-Setup Jenkins Continuous Integration (CI).
-
 Kubernetes integrates with jenkins. Require Kubernetes plugin to setup k3s cloud.
 
 ![](Images/b15.png)
-
-Cloud configuration with kubernetes details i.e define namespace.
 
 Click on manage jenkins -> manage nodes and clouds -> configure clouds -> select cloud from dropdown list as kubernetes .
 
@@ -335,7 +331,7 @@ Now click on create **Pipeline**
 
 ![](Images/b21.png)
 
-Copy the following script in script section
+Copy the following code in script section
 
 ```
 pipeline {
@@ -418,9 +414,7 @@ pipeline {
 
 ![](Images/b22.png)
 
-Install docker on both worker and master nodes using the following [link](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04)
-
-If you face error while checking the status of docker, then run the following command 
+Install docker on both worker and master nodes using the following [link](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04). If you face error while checking the status of docker, then run the following command 
 
   rm -fr /var/run/docker.sock
 

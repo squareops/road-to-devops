@@ -199,20 +199,19 @@ Go to this folder deployment-through-ingress
 ![](Images/a40.png)
 
 Make sure you have built and updated the deployment files with your docker images respectively
-1. update image in sa-logic-deployment.yaml
+1. Update image in sa-logic-deployment.yaml
 
 ![](Images/a41.png)
 
-2. update image in sa-web-app-deployment.yaml
+2. Update image in sa-web-app-deployment.yaml
 
 ![](Images/a43.png)
 
-3. update the host name in the ingress-web.yaml file
+3. Update the host name in the ingress-web.yaml file
 
 ![](Images/a44.png)
 
-4. 
-Firstly deploy logic deployment and logic service by running the following commands 
+4. Firstly deploy logic deployment and logic service by running the following commands 
 
 ```
 kubectl apply -f sa-logic-deployment.yaml
@@ -329,3 +328,6 @@ Hit the frontend domain you’ll get the application output
 # Conclusion 
 
 You have deployed application on Kubernetes using ingress and helm for which you had deployed pods, services as loadbalancer and ingress. Next you had updated the docker images in respective values.yaml for helm chart deployment 
+
+You have successfully deployed application on Kubernetes, now you will create the CI/CD for the same in the next lectures 
+
