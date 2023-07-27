@@ -52,7 +52,7 @@ Run a command to update a database at 2 AM every day:
 
 Run a script every Sunday at midnight to perform a weekly maintenance task:
 
-0 0 * * 0 /path/to/weekly_task.sh
+- 0 0 * * 0 /path/to/weekly_task.sh
 
 ## Important Tips
 
