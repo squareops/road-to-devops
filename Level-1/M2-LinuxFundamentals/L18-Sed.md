@@ -12,7 +12,7 @@ To use sed, open a terminal on your Linux system. You can find the terminal appl
 
 The basic syntax of the sed command is as follows:
 
-![Alt text](Images/image.png)
+![Alt text](Images/sed0.png)
 
 - options: These are optional flags that modify the behavior of sed.
 - commands: These are the operations you want to perform on the input text.
