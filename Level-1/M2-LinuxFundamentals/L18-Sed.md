@@ -26,7 +26,7 @@ Search for a specific string and replace it with another string in the text.
 
 Example:
 
-![Alt text](image.png)
+![Alt text](Images/sed5.png)
 
 **2. In-place Editing**
 
@@ -58,7 +58,7 @@ Add new lines before or after specific patterns.
 
 Example:
 
-![Alt text](Images/sed3.png)
+![Alt text](Images/sed4.png)
 
 ## Practice and Explore
 
