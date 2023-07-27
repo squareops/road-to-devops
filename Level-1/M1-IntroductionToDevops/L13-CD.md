@@ -12,9 +12,9 @@ Continuous integration, delivery and deployment are collectively referred to as 
 
 Continuous deployment is not the same thing as continuous delivery, although the two terms are often confused and, indeed, share the acronym of CD.
 
-## Here are top 10 continuous integration tools 
-- AWS CodeDeploy
-- Octopus Deploy
+## Here are top 10 CI/CD tools 
+- AWS Code Pipeline
+- GitHub Action
 - Jenkins
 - TeamCity
 - DeployBot

@@ -48,7 +48,7 @@ ls -al: Lists files and directories with detailed information like permissions,s
 
 cd or cd ~: Navigate to HOME directory
 
-cd ..: Move one level up
+cd ..: Move one level down
 
 cd: To change to a particular directory
 

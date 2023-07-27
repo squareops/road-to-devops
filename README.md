@@ -8,7 +8,7 @@ DevOps is a set of practices that help to reach the goal of this movement: reduc
 
 ### DevOps adoption means that you are willing to change fast, develop fast, test fast, fail fast, recover fast, learn fast and push the product/features fast to the market
 
-Here we have designed a step-by-step roadmap to reach your goal to excel in DevOps. We have created a ROAD TO DEVOPS roadmap which has 2 Levels starting with basics to advanced. 
+Here we have designed a step-by-step roadmap to reach your goal to excel in DevOps. We have created a ROAD TO DEVOPS roadmap which has 3 Levels starting with basics to advanced. 
 
 ## Why Did We Publish it?
 

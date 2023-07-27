@@ -294,12 +294,18 @@ Install code deploy agent as follows on ec2 instance or adding as user data in l
 ```
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install ruby
-sudo apt-get install wget
-cd /home/ubuntu
-wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
-chmod +x ./install
-sudo ./install auto
+sudo apt-get install -y ruby
+wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/releases/codedeploy-agent_1.0-1.1597_all.deb
+mkdir codedeploy-agent_1.0-1.1597_ubuntu20
+dpkg-deb -R codedeploy-agent_1.0-1.1597_all.deb codedeploy-agent_1.0-1.1597_ubuntu20
+sed 's/2.0/2.7/' -i ./codedeploy-agent_1.0-1.1597_ubuntu20/DEBIAN/control
+dpkg-deb -b codedeploy-agent_1.0-1.1597_ubuntu20
+dpkg -i codedeploy-agent_1.0-1.1597_ubuntu20.deb
+sudo systemctl start codedeploy-agent
+sudo systemctl enable codedeploy-agent
+
+Note:- The minimum supported version of the CodeDeploy agent is 1.5.0. We can check the available version of code deploy agent using command “aws s3 ls s3://aws-codedeploy-region-identifier/releases/ | grep '\.deb$"
+
 ```
 
 For checking the service 
