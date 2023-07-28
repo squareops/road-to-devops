@@ -20,17 +20,7 @@ Example: /etc/systemd/system/my_script.service
 
 Open the unit file using a text editor and define the service configuration. At a minimum, it should contain the following:
 
-[Unit]
-Description=My Bash Script Service
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/path/to/your/bash_script.sh
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
+![Alt text](Images/systemd.png)
 
 - Description: A description of your service.
 - After: Specifies any units that your service should start after, like network.target.
