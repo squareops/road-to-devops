@@ -50,6 +50,7 @@ This section has various modules which will help you to learn DevOps Job from sc
 |  M05    | [Infrastructure Automation](Level-2/M5-InfraAutomation)  |
 |  M06    | [AWS Well-Architected Training](Level-2/M6-WellArchitectedTraining)  |
 |  M07    | [MERN stack deployment ](Level-2/M7-WebApp3Tier-MERN)  |
+|  M08    | [Introduction to DevSecOps](Level-2/M8-DevSecOps)  |    
 
 #### Note: For a beginner, it will take up to 4-6 weeks to complete Level 2 but for an intermediate person Level 2 can be completed within 3-4 weeks  
 
@@ -60,6 +61,8 @@ This section has various modules which will help you to learn DevOps Job from sc
 |  M01    | [Introduction to Kubernetes](Level-3/M1-IntroductionToKubernetes)  |
 |  M02    | [Hands on Kubernetes](Level-3/M2-HandsOnKubernetes)  |
 |  M03    | [Observability on Kubernetes](Level-3/M3-ObservabilityOnKubernetes)  |
+|  M04    | [Introduction to Cloud native development ](Level-3/M4-CloudNativeDevelopment)  |
+|  M05    | [Introduction to k8s security](Level-3/M5-KubernetesSecurity)  |
   
 ## Contribution & Issue Reporting
 
