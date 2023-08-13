@@ -11,6 +11,7 @@
 |  M05    | [Infrastructure Automation](M5-InfraAutomation)  |
 |  M06    | [AWS Well-Architected Training](M6-WellArchitectedTraining)  |
 |  M07    | [MERN stack deployment ](M7-WebApp3Tier-MERN)  |
+|  M08    | [Introduction to DevSecOps ](M8-DevSecOps)  |
 
 
 #### Along with this RoadMap start preparing for the AWS Certified Solutions Architect Associate exam,  every day for 1-2 hours (Expected to clear exam within 2 months of starting this roadmap level 2 )
