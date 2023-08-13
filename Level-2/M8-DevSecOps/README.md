@@ -10,6 +10,6 @@ In this module, we will learn about security with DevSecOps
 |  L04    | [Compliances with DevSecOps](L04-Compliance-with-DevSecOps.md)  |
 |  L05    | [Tools for DevSecOps](L05-Tools-For-DevSecOps.md)  |
 
-#### Module Completion Estimate: 2 days
+#### Module Completion Estimate: 3 days
 
 #### Note: For a beginner, it will take up to 4-6 weeks to complete Level 2 but for an intermediate person Level 2 can be completed within 3-4 weeks  
