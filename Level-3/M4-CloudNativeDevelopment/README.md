@@ -4,7 +4,7 @@ This module gives overview on cloud native development.
 
 | Lecture |   Description  |
 |---------|----------------|
-|  L01    | [Introduction to cloud native development](L01-ArchitecturalPattern.md)  |
+|  L01    | [Architectural Patterns in Cloud-Native Development](L01-ArchitecturalPattern.md)  |
 
 #### Module Completion Estimate: 2 days for beginners and 1 days for an intermediate  
 
