@@ -1,6 +1,6 @@
 # Understand Configuration Orchestration
 
-![](Images/conf.png)
+![](Images/CFT-TF-Ans11.jpg)
 
 ## What is configuration orchestration?
 Orchestration is the automation of processes. In other words, determining the order in which certain tasks need to take place. For example, prescribing how an application should move from provisioning to deployment. The bottom line? Orchestration facilitates agility.
