@@ -8,6 +8,7 @@ In this module, we will learn about security with DevSecOps
 |  L02    | [Infrastructure with DevSecOps](L02-Infrastructure-with-DevSecOps.md)  |
 |  L03    | [Strengthening security with DevSecOps](L03-Strengthening-Security-with-DevSecOps.md)  |
 |  L04    | [Compliances with DevSecOps](L04-Compliance-with-DevSecOps.md)  |
+|  L05    | [Tools for DevSecOps](L05-Tools-For-DevSecOps.md)  |
 
 #### Module Completion Estimate: 2 days
 
