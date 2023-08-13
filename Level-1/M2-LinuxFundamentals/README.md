@@ -20,6 +20,10 @@ This module gives an introduction to basics of Linux basic commands, GIT, DNS ho
 |  L15    | [What is WebServer ?](L15-WebServer.md)  |
 |  L16    | [HTTP Response Codes](L16-HttpResponseCodes.md)  |
 |  L17    | [Connecting AWS instance with VS CODE](L17-VS-CODE.md)  |
+|  L18    | [Introduction to sed command and usage](L18-Sed.md)  |
+|  L19    | [Introduction to cron job and usage](L19-CronJob.md)  |
+|  L20    | [Introduction to Systemd](L20-Systemd.md) |
+|  L21    | [Version control system](L21-VCS.md)  |
 
 #### Module Completion Estimate: 1 week for beginners and 4 Days for an intermediate 
 
