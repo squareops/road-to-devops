@@ -1,4 +1,4 @@
-# Module 3: Observability on Kubernetes
+# Module 3: Cloud Native Development
 
 This module gives overview on cloud native development.
 
